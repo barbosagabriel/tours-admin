@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include partials/meta %>
+
+    <title>Tours Admin</title>
+
+    <% include partials/styles %>   
+
+</head>
+
+<body class="infobar-offcanvas">
+
+    <% include partials/header %>
+
+        <div id="wrapper">
+            <div id="layout-static">
+                <% include partials/left-menu %>
+                    <div class="static-content-wrapper">
+                        <div class="static-content">
+                            <div class="page-content">
+                                <ol class="breadcrumb">
+
+                                    <li class="">
+                                        <a href="/">Home</a>
+                                    </li>
+                                    <li class="active">
+                                        <a href="/">Dashboard</a>
+                                    </li>
+
+                                </ol>
+                                <div class="page-heading">
+                                    <h1>Dashboard</h1>
+                                    <div class="options">
+                                        <div class="btn-toolbar">
+                                            <a href="/" class="btn btn-default">
+                                                <i class="fa fa-fw fa-refresh"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container-fluid">
+                                    <div data-widget-group="group1">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="amazo-tile tile-info" href="#">
+                                                    <div class="tile-heading">
+                                                        <div class="title">Passeios realizados</div>
+                                                        <div class="secondary">este mês</div>
+                                                    </div>
+                                                    <div class="tile-body">
+                                                        <div class="content">40</div>
+                                                    </div>
+                                                    <div class="tile-footer">
+                                                        <span class="info-text text-right">80% de 50</span>
+                                                        <div class="progress">
+                                                            <div class="progress-bar" style="width: 80%"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <div class="amazo-tile tile-info">
+                                                    <div class="tile-heading">
+                                                        <div class="title">Novos clientes</div>
+                                                        <div class="secondary">este mês</div>
+                                                    </div>
+                                                    <div class="tile-body">
+                                                        <div class="content">10</div>
+                                                    </div>
+                                                    <div class="tile-footer">
+                                                        <span class="info-text text-right">66% de 15</span>
+                                                        <div class="progress">
+                                                            <div class="progress-bar" style="width: 66%"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <div class="amazo-tile tile-white">
+                                                    <div class="tile-heading">
+                                                        <span class="title">Clientes</span>
+                                                    </div>
+                                                    <div class="tile-body">
+                                                        <span class="content">2.500</span>
+                                                    </div>
+                                                    <div class="tile-footer">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <div class="amazo-tile tile-white">
+                                                    <div class="tile-heading">
+                                                        <div class="title">Serviços</div>
+                                                    </div>
+                                                    <div class="tile-body">
+                                                        <span class="content">18</span>
+                                                    </div>
+                                                    <div class="tile-footer text-center">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <% include partials/footer %>
+                    </div>
+
+            </div>
+        </div>
+
+        <% include partials/right-menu %>
+
+        <% include partials/scripts %>
+
+</body>
+
+</html>
