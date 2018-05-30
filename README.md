@@ -20,4 +20,4 @@ Rename .envexample file to .env and replace your configuration data.
 node server.js
 ```
 
-You can browse the API at <http://localhost:8080>
+You can browse the app at <http://localhost:8080>
