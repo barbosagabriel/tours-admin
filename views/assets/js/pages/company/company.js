@@ -1,11 +1,15 @@
+'use strict';
+
 $(document).ready(function () {
     
     $('#form-company').parsley(ParsleyConfig.options);
 
     var API_URL = document.getElementById('apiUrl').value;
+    var companyId = null;
     
     getDefaultCompany(API_URL)
         .then(function(id){
+            companyId = id;
             loadCompany(API_URL, id);
         })
         .catch(function(error){
@@ -14,6 +18,7 @@ $(document).ready(function () {
 
     $('#btnSave').on('click', function () {
         var isFormValid = $('#form-company').parsley().validate();
+        var companyId = document.getElementById('id').value;
 
         if (isFormValid) {
             getCompanyData()
@@ -88,6 +93,7 @@ function loadCompany(API_URL, companyId) {
         type: 'GET',
         dataType: 'json',
         success: function (data) {
+            document.getElementById('id').value = companyId;
             document.getElementById('name').value = data.name;
             document.getElementById('corporate-name').value = data.corporateName;
             document.getElementById('zipcode').value = data.zipcode || null;
