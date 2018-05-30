@@ -7371,7 +7371,7 @@ body.topnav-collapsed #topnav .navbar-brand {
   }
 }
 body.topnav-collapsed header.navbar .navbar-brand {
-  width: 100px;
+  /* width: 100px; */
 }
 body.topnav-collapsed header.navbar .navbar-collapse {
   width: auto;
