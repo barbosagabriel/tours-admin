@@ -3,7 +3,7 @@ const PORT = process.env.PORT || 8080;
 
 var express = require('express');
 var app = express();
-var routerProvider = require('./config/routesProvider');
+var routerProvider = require('./config/routerProvider');
 
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/views'));
