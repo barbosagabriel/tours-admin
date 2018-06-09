@@ -1,7 +1,7 @@
 var ParsleyConfig = (function(){
 
     var _options = {
-        successClass: '',//'has-success',
+        successClass: '',
         errorClass: 'has-error',
         errorElem: '<span></span>',
         errorsWrapper: '<span class="help-block"></span>',

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../../partials/meta %>
+
+        <title>Tours Admin</title>
+
+        <% include ../../partials/styles %>
+
+            <link href="assets/plugins/datatables/dataTables.bootstrap.css" type="text/css" rel="stylesheet">
+            <link href="assets/plugins/datatables/dataTables.fontAwesome.css" type="text/css" rel="stylesheet">
+
+</head>
+
+<body class="infobar-overlay sidebar-scroll">
+
+    <% include ../../partials/header %>
+
+        <div id="wrapper">
+            <div id="layout-static">
+                <% include ../../partials/left-menu %>
+                    <div class="static-content-wrapper">
+                        <div class="static-content">
+                            <div class="page-content">
+                                <ol class="breadcrumb">
+                                    <li class="">
+                                        <a href="/customers">Clientes</a>
+                                    </li>
+                                    <li class="active">
+                                        <a href="#">Todos</a>
+                                    </li>
+                                </ol>
+                                <div class="page-heading">
+                                    <h1>Clientes</h1>
+                                    <div class="options">
+                                        <div class="btn-toolbar">
+                                            <a href="/customers/create" class="btn btn-default" title="Novo Cliente">
+                                                <i class="fa fa-fw fa-plus"></i>
+                                                <span>Novo</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="panel panel-default">
+                                                <div class="panel-body">
+                                                    <div class="panel-body panel-no-padding">
+                                                        <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Nome</th>
+                                                                    <th>E-mail</th>
+                                                                    <th>Cidade</th>
+                                                                    <th>Estado</th>
+                                                                    <th></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <% customers.forEach(function(customer) { %>
+                                                                    <tr class="odd">
+                                                                        <td>
+                                                                            <%= customer.name %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%= customer.email %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%= customer.city %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%= customer.state %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <a href="/customers/<%= customer._id%>/edit" class="btn btn-default-alt" alt="Editar">
+                                                                                <i class="fa fa-pencil"></i>
+                                                                            </a>
+                                                                            <a href="/customers/<%= customer._id%>/delete" class="btn btn-danger-alt" alt="Excluir">
+                                                                                <i class="fa fa-trash"></i>
+                                                                            </a>                                                                          
+                                                                        </td>
+                                                                    </tr>
+                                                                <% }); %>
+                                                            </tbody>
+                                                        </table>
+                                                        <div class="panel-footer">
+                                                            <div class="row">
+                                                                <div class="col-md-8 col-md-offset-2">
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <% include ../../partials/footer %>
+                        </div>
+                    </div>
+            </div>
+
+            <% include ../../partials/right-menu %>
+
+            <% include ../../partials/scripts %>
+
+            <script>
+                $(document).ready(function () {
+                    console.log('<%= customers %>');
+                    var customers = '<%= customers %>';
+                });
+            </script>
+
+            <script src="assets/plugins/datatables/jquery.dataTables.js"></script>
+            <script src="assets/plugins/datatables/dataTables.bootstrap.js"></script>
+            <script>
+                $(document).ready(function () {
+                    $('#example').dataTable({
+                        "language": {
+                            "sEmptyTable": "Nenhum registro encontrado",
+                            "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                            "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+                            "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+                            "sInfoPostFix": "",
+                            "sInfoThousands": ".",
+                            "sLengthMenu": "_MENU_ resultados por página",
+                            "sLoadingRecords": "Carregando...",
+                            "sProcessing": "Processando...",
+                            "sZeroRecords": "Nenhum registro encontrado",
+                            "sSearch": "Pesquisar",
+                            "oPaginate": {
+                                "sNext": "Próximo",
+                                "sPrevious": "Anterior",
+                                "sFirst": "Primeiro",
+                                "sLast": "Último"
+                            },
+                            "oAria": {
+                                "sSortAscending": ": Ordenar colunas de forma ascendente",
+                                "sSortDescending": ": Ordenar colunas de forma descendente"
+                            }
+                        }
+                    });
+                    $('.dataTables_filter input').attr('placeholder', 'Pesquisar...');
+
+                    $('.panel-ctrls').append($('.dataTables_filter').addClass("pull-right")).find("label").addClass("panel-ctrls-center");
+                    $('.panel-ctrls').append("<i class='separator'></i>");
+                    $('.panel-ctrls').append($('.dataTables_length').addClass("pull-left")).find("label").addClass("panel-ctrls-center");
+
+                    $('.panel-footer').append($(".dataTable+.row"));
+                    $('.dataTables_paginate>ul.pagination').addClass("pull-right m0");
+                });
+            </script>
+</body>
+
+</html>

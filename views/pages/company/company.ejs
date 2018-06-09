@@ -2,21 +2,21 @@
 <html lang="en">
 
 <head>
-    <% include partials/meta %>
+    <% include ../../partials/meta %>
 
-        <title>Tours Admin</title>
+    <title>Tours Admin</title>
 
-        <% include partials/styles %>
+    <% include ../../partials/styles %>
 
 </head>
 
-<body class="infobar-offcanvas">
+<body class="infobar-overlay sidebar-scroll">
 
-    <% include partials/header %>
+    <% include ../../partials/header %>
 
     <div id="wrapper">
         <div id="layout-static">
-            <% include partials/left-menu %>
+            <% include ../../partials/left-menu %>
             <div class="static-content-wrapper">
                 <div class="static-content">
                     <div class="page-content">
@@ -163,7 +163,7 @@
                         </div>
                     </div>
                 </div>
-                <% include partials/footer %>
+                <% include ../../partials/footer %>
             </div>
         </div>
     </div>
@@ -171,9 +171,9 @@
     <input type="text" class="hide" id="apiUrl"/>
     <input type="text" class="hide" id="id"/>
 
-    <% include partials/right-menu %>
+    <% include ../../partials/right-menu %>
 
-    <% include partials/scripts %>
+    <% include ../../partials/scripts %>
 
     <script>
         $(document).ready(function () {

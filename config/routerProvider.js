@@ -1,13 +1,14 @@
 var homeRoutes = require('../routes/home.routes.js');
 var errorsRoutes = require('../routes/errors.routes.js');
 var companyRoutes = require('../routes/company.routes.js');
+var customerRoutes = require('../routes/customer.routes.js');
 
 module.exports = (function(){
 
     var _routes = function(app){
         app.use('/', homeRoutes);
         app.use('/company', companyRoutes);
-        
+        app.use('/customers', customerRoutes);
         app.use('/', errorsRoutes);
     }
 
