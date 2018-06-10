@@ -1,25 +1,9 @@
-// ------------------------------
-// Browser Detection Plugin
-// https://github.com/gabceb/jquery-browser-plugin/
-// ------------------------------
 !function(a,b){"use strict";var c,d;if(a.uaMatch=function(a){a=a.toLowerCase();var b=/(opr)[\/]([\w.]+)/.exec(a)||/(chrome)[ \/]([\w.]+)/.exec(a)||/(version)[ \/]([\w.]+).*(safari)[ \/]([\w.]+)/.exec(a)||/(webkit)[ \/]([\w.]+)/.exec(a)||/(opera)(?:.*version|)[ \/]([\w.]+)/.exec(a)||/(msie) ([\w.]+)/.exec(a)||a.indexOf("trident")>=0&&/(rv)(?::| )([\w.]+)/.exec(a)||a.indexOf("compatible")<0&&/(mozilla)(?:.*? rv:([\w.]+)|)/.exec(a)||[],c=/(ipad)/.exec(a)||/(iphone)/.exec(a)||/(android)/.exec(a)||/(windows phone)/.exec(a)||/(win)/.exec(a)||/(mac)/.exec(a)||/(linux)/.exec(a)||/(cros)/i.exec(a)||[];return{browser:b[3]||b[1]||"",version:b[2]||"0",platform:c[0]||""}},c=a.uaMatch(b.navigator.userAgent),d={},c.browser&&(d[c.browser]=!0,d.version=c.version,d.versionNumber=parseInt(c.version)),c.platform&&(d[c.platform]=!0),(d.android||d.ipad||d.iphone||d["windows phone"])&&(d.mobile=!0),(d.cros||d.mac||d.linux||d.win)&&(d.desktop=!0),(d.chrome||d.opr||d.safari)&&(d.webkit=!0),d.rv){var e="msie";c.browser=e,d[e]=!0}if(d.opr){var f="opera";c.browser=f,d[f]=!0}if(d.safari&&d.android){var g="android";c.browser=g,d[g]=!0}d.name=c.browser,d.platform=c.platform,a.browser=d}(jQuery,window);
 
-
-// ------------------------------
-// Variables
-// ------------------------------
-
-// AutoCollapse 
-// Doesn't matter how many items you many have in the header, it stays responsive :3
-// Just hardcode the height of the header
 var headerHeight = 50; // Also have the same height in @navbar-height in variables.less
 
 var vFSLayout; //for Stretch Sidebars
 
-// ------------------------------
-// =UTILITY BELT
-// Psst: Search for '=u' to come straight here. You're welcome.
-// ------------------------------
 var Utility = {
     str_replace: function(c, d, b) {
         var a = c.split(d);
@@ -112,30 +96,7 @@ var Utility = {
             }
         });
     },
-    // resizePageHeight: function() {
-    //     var v = Utility.getViewPort().height;
-    //     var f = $('footer').height();
-    //     var h = 0;
-
-
-    //    if ($('#layout-fixed').hasClass('ui-layout-container')) {
-    //        // var f = $('footer').height();
-    //        // $('.fixed-content-wrapper').height( $('.ui-layout-center').height() - f + 20 );
-
-    //    } else {
-    //         var c = $("#wrapper").height();
-
-    //         if ($('#topnav').hasClass('navbar-fixed-top')) {
-    //            h = headerHeight;
-    //         }
-
-    //         if (c > v) {
-    //             $("#wrapper").height(c-h+f-20);
-    //         }
-    //    }
-    // },
     getBrandColor: function (name) {
-        // Store Brand colors in JS so it can be called from plugins
         var brandColors = {
             'default':      '#ecf0f1',
             'gray':         '#aaa',
@@ -194,7 +155,6 @@ var Utility = {
 
             $('body').toggleClass('infobar-active');
 
-            //in layout-boxed pages, toggle visibility instead of animation
             if ($('body').hasClass('layout-boxed')) {
                 Utility.rightbarRightPos();
             }
@@ -220,11 +180,7 @@ var Utility = {
             }
         }
     },
-    // -------------------------------
-    // Rightbar Right Position (in layout-boxed)
-    // -------------------------------
     rightbarRightPos: function() {
-        //Set Right position for fixed layouts
         $('.infobar-wrapper').css('right','0').hide();
 
         if ($('body').hasClass('layout-boxed')) {
@@ -236,9 +192,6 @@ var Utility = {
             $('.infobar-wrapper').show();
         }
     },
-    // -------------------------------
-    // Auto Collapse Large Menu
-    // -------------------------------
     autocollapse: function() {
         var navbar = $('header.navbar');
         var menu = $('header.navbar .navbar-collapse');
@@ -264,20 +217,9 @@ var Utility = {
     }
     
 };
-// ------------------------------
-// =/U
-// ------------------------------
 
-
-// ------------------------------
-// =PLUGINS. custom made shizzle, yo!
-// ------------------------------
 (function($) {
 
-
-    // ------------------------------
-    // ScrollSidebar
-    // ------------------------------
     $.scrollSidebar = function(element, options) {
         var defaults = {};
         var plugin = this;
@@ -296,10 +238,6 @@ var Utility = {
         });
     };
 
-
-    // ------------------------------
-    // Sidebar Accordion Menu
-    // ------------------------------
     $.sidebarAccordion = function(element, options) {
         var defaults = {};
         var plugin = this;
@@ -375,9 +313,6 @@ var Utility = {
         });
     }
 
-    // ------------------------------
-    // Full Height Panel
-    // ------------------------------
     $.fullHeightPanel = function(element, options) {
         var defaults = {};
         var plugin = this;
@@ -419,49 +354,26 @@ var Utility = {
     }
 
 })(jQuery);
-// ------------------------------
-// =/P
-// ------------------------------
 
-
-// ------------------------------
-// =DOM Ready
-// ------------------------------
 $(document).ready(function () {
 
-
-    // Add These To support nanoScroller
     if ($('body').hasClass('sidebar-scroll')) {
         $('.static-sidebar').addClass('scroll-pane');
         $('.sidebar').addClass('scroll-content');
     }
 
-
-    // Scrollbar and reinitting scrollbars
     Utility.initScroller();
     $('.toolbar').on('shown.bs.dropdown', function () {Utility.initScroller();});
     $('.widget').on('shown.bs.collapse', function () {Utility.initScroller();});
     $('.widget').on('hidden.bs.collapse', function () {Utility.initScroller();});
 
-
-
     Utility.sidebar_resizing();
 
-    // ------------------------------
-    // Sidebar Accordion
-    // ------------------------------
     $('body').sidebarAccordion();
 
-    // ------------------------------
-    // Full Height Panel
-    // ------------------------------
     if ($('.full-height-content')) {
         $('body').fullHeightPanel();
     }
-
-    // ------------------------------
-    // Fixed Sidebar Layout
-    // ------------------------------
 
     try {
         vFSLayout = $('#layout-fixed').layout({
@@ -494,9 +406,6 @@ $(document).ready(function () {
         // For more info, refer to documentation
     }
 
-    // ------------------------------
-    // Toggling Sidebars
-    // ------------------------------
     $('#trigger-sidebar>a').click(function () {
         Utility.toggle_leftbar();
     });
@@ -509,18 +418,10 @@ $(document).ready(function () {
         Utility.toggle_rightbar();
     });
 
-    // ------------------------------
-    // Megamenu
-    // This code will prevent unexpected menu close 
-    // when using some components (like accordion, forms, etc)
-    // ------------------------------
     $('body').on('click', '.yamm .dropdown-menu, .dropdown-menu-form', function(e) {
       e.stopPropagation()
     })
     
-    // -------------------------------
-    // For tabs inside dropdowns
-    // -------------------------------
     $('.dropdown-menu a[data-toggle="tab"]').click(function (e) {
         e.stopPropagation();
         $(this).tab('show');
@@ -529,9 +430,6 @@ $(document).ready(function () {
         $(this).closest('.dropdown').removeClass('active');        
     });
 
-    // -------------------------------
-    // Back to Top button
-    // -------------------------------
     $('#back-to-top').click(function () {
         $('body,html').animate({
             scrollTop: 0
@@ -539,9 +437,6 @@ $(document).ready(function () {
         return false;
     });
 
-    // -------------------------------
-    // Panel Collapses
-    // -------------------------------
     $('a.panel-collapse').click(function() {
         $(this).children().toggleClass("fa-chevron-down fa-chevron-up");
         $(this).closest(".panel-heading").next().slideToggle({duration: 200});
@@ -549,9 +444,6 @@ $(document).ready(function () {
         return false;
     });
 
-    // -------------------------------
-    // Quick Start
-    // -------------------------------
     $('#headerbardropdown').click(function() {
         $('#headerbar').css('top',0);
         return false;
@@ -565,27 +457,14 @@ $(document).ready(function () {
       event.stopPropagation();
     });
 
-    // -------------------------------
-    // Project Switcher
-    // -------------------------------
-
-    // ADD SLIDEDOWN ANIMATION TO DROPDOWN //
     $('.project-switcher').on('show.bs.dropdown', function(e){
         $(this).find('.dropdown-menu').first().stop(true, true).slideDown(200);
     });
 
-    // ADD SLIDEUP ANIMATION TO DROPDOWN //
     $('.project-switcher').on('hide.bs.dropdown', function(e){
         $(this).find('.dropdown-menu').first().stop(true, true).slideUp(200);
     });
 
-
-    // -------------------------------
-    // FireFox Shim
-    // FireFox is the *only* browser that doesn't support position:relative for
-    // block elements with display set to table-cell, which is needed for the footer.
-    // TODO: Replace $.browser with Modernizer.
-    // -------------------------------
     if ($.browser.mozilla) {
         $('footer').css('width',$('footer').parent().width());
 
@@ -594,9 +473,6 @@ $(document).ready(function () {
         });
     }
 
-    // ---------------------------------
-    // Faux Off-cavas effect on collapse
-    // ---------------------------------
     if (!(vFSLayout)) {
         enquire.register("screen and (max-width: 767px)", {
             match : function() {  //smallscreen
@@ -621,14 +497,10 @@ $(document).ready(function () {
         $('.static-content').css('width',(w)+'px');
     }
 
-    // -------------------------------
-    // Search on Top
-    // -------------------------------
     $('.search-toggler').click( function() {
         $(this).siblings('#sidebar-search').toggleClass('open');
         $(this).find('i').toggleClass('fa-times fa-search');
     });
-
 
     $('#widget-search').click(function(event) {
       $('html').one('click',function() {
@@ -639,21 +511,12 @@ $(document).ready(function () {
       event.stopPropagation();
     });
 
-    // Autocollapse
     Utility.autocollapse();
 
 });
-// ------------------------------
-// =/D No more D for you.
-// ------------------------------
 
-
-// ------------------------------
-// Keyup
-// ------------------------------
 $(document).keyup(function(e) {
 
-    // Infobar Close on Keypress Esc
     if (e.keyCode == 27) { // esc key
         try {
             vFSLayout.close('east');
@@ -666,11 +529,6 @@ $(document).keyup(function(e) {
     }
 });
 
-
-
-// ------------------------------
-// DOM Loaded
-// ------------------------------
 $(window).bind("load", function() { 
     $('body').scrollSidebar();
     $(window).trigger('resize');
@@ -682,9 +540,7 @@ $(window).scroll(function(){
 });
 
 $(window).resize(function(){
-    //Utility.resizePageHeight();
     Utility.autocollapse();
 
     Utility.sidebar_resizing();
-    // Utility.initScroller();
 });

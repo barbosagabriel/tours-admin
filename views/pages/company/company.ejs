@@ -32,9 +32,6 @@
                             <h1>Empresa</h1>
                             <div class="options">
                                 <div class="btn-toolbar">
-                                    <!-- <a href="/" class="btn btn-default">
-                                    <i class="fa fa-fw fa-refresh"></i>
-                                </a> -->
                                 </div>
                             </div>
                         </div>
@@ -45,19 +42,25 @@
                                         <div class="panel-heading">
                                             <h2>Dados da Empresa</h2>
                                         </div>
-                                        <div class="panel-body">
-                                            <form role="form" class="form-horizontal row-border" id="form-company" data-parsley-validate>
+                                        <form action="/company/<%= company._id%>" method="post" role="form" class="form-horizontal row-border" id="form-company" data-parsley-validate>
+                                            <div class="panel-body">
+                                                <% if(typeof error != 'undefined' && error){ %>
+                                                    <div class="alert alert-dismissable alert-danger">
+                                                        <strong><%= error.title %></strong> <%= error.message %>
+                                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                    </div>
+                                                <% } %>
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <label class="col-md-2 control-label">Nome*</label>
                                                         <div class="col-md-8">
-                                                            <input type="text" id="name" class="form-control" required>
+                                                            <input type="text" id="name" name="name" class="form-control" value="<%=company.name%>" required>
                                                         </div>
                                                     </div>
                                                     <div class="row mt20">
                                                         <label class="col-md-2 control-label">Razão Social*</label>
                                                         <div class="col-md-8">
-                                                            <input type="text" id="corporate-name" class="form-control" required>
+                                                            <input type="text" id="corporate-name" name="corporateName" class="form-control" value="<%=company.corporateName%>" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -65,7 +68,7 @@
                                                     <div class="row">
                                                         <label class="col-md-2 control-label">Código Postal</label>
                                                         <div class="col-md-2">
-                                                            <input type="text" id="zipcode" class="form-control">
+                                                            <input type="text" id="zipcode" name="zipcode" class="form-control" value="<%=company.zipcode%>">
                                                         </div>
                                                         <!-- <div class="md-2">
                                                             <a href="#" class="btn btn-default mr10">Pesquisar CEP</a>
@@ -75,37 +78,37 @@
                                                     <div class="row mt20">
                                                         <label class="col-md-2 control-label">Endereço*</label>
                                                         <div class="col-md-8">
-                                                            <input type="text" id="address" class="form-control" required>
+                                                            <input type="text" id="address" name="address" class="form-control" value="<%=company.address%>" required>
                                                         </div>
                                                     </div>
                                                     <div class="row mt20">
                                                         <label class="col-md-2 control-label">Número</label>
                                                         <div class="col-md-8">
-                                                            <input type="text" id="address-number" class="form-control" data-parsley-minlength="1" data-parsley-type="alphanum">
+                                                            <input type="text" id="address-number" name="addressNumber" class="form-control" value="<%=company.addressNumber%>" data-parsley-minlength="1" data-parsley-type="alphanum">
                                                         </div>
                                                     </div>
                                                     <div class="row mt20">
                                                         <label class="col-md-2 control-label">Complemento</label>
                                                         <div class="col-md-8">
-                                                            <input type="text" id="address-2" class="form-control">
+                                                            <input type="text" id="address-2" name="addressLine2" class="form-control" value="<%=company.addressLine2%>">
                                                         </div>
                                                     </div>
                                                     <div class="row mt20">
                                                         <label class="col-md-2 control-label">Cidade*</label>
                                                         <div class="col-md-8">
-                                                            <input type="text" id="city" class="form-control" required>
+                                                            <input type="text" id="city" name="city" class="form-control" value="<%=company.city%>" required>
                                                         </div>
                                                     </div>
                                                     <div class="row mt20">
                                                         <label class="col-md-2 control-label">Estado*</label>
                                                         <div class="col-md-8">
-                                                            <input type="text" id="state" class="form-control" required>
+                                                            <input type="text" id="state" name="state" class="form-control" value="<%=company.state%>" required>
                                                         </div>
                                                     </div>
                                                     <div class="row mt20">
                                                         <label class="col-md-2 control-label">País*</label>
                                                         <div class="col-md-8">
-                                                            <input type="text" id="country" class="form-control" required>
+                                                            <input type="text" id="country" name="country" class="form-control" value="<%=company.country%>" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -113,17 +116,17 @@
                                                     <div class="row">
                                                         <label class="col-md-2 control-label">E-mail*</label>
                                                         <div class="col-md-8">
-                                                            <input type="text" id="email" class="form-control" data-parsley-type="email" required>
+                                                            <input type="text" id="email" name="email" class="form-control" value="<%=company.email%>" data-parsley-type="email" required>
                                                         </div>
                                                     </div>
                                                     <div class="row mt20">
                                                         <label class="col-md-2 control-label">Telefone Principal*</label>
                                                         <div class="col-md-3">
-                                                            <input type="text" id="phone" class="form-control" required>
+                                                            <input type="text" id="phone" name="phone" class="form-control" value="<%=company.phone%>" required>
                                                         </div>
                                                         <label class="col-md-2 control-label">Telefone Secundário</label>
                                                         <div class="col-md-3">
-                                                            <input type="text" id="phone-secondary" class="form-control">
+                                                            <input type="text" id="phone-secondary" name="phoneSecondary" class="form-control" value="<%=company.phoneSecondary%>">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -131,31 +134,31 @@
                                                     <div class="row">
                                                         <label class="col-md-2 control-label">Site</label>
                                                         <div class="col-md-8">
-                                                            <input type="text" id="website" class="form-control" data-parsley-type="url">
+                                                            <input type="text" id="website" name="website" class="form-control" value="<%=company.website%>" data-parsley-type="url">
                                                         </div>
                                                     </div>
                                                     <div class="row mt20">
                                                         <label class="col-md-2 control-label">Facebook</label>
                                                         <div class="col-md-8">
-                                                            <input type="text" id="facebook" class="form-control" data-parsley-type="url">
+                                                            <input type="text" id="facebook" name="facebook" class="form-control" value="<%=company.facebook%>" data-parsley-type="url">
                                                         </div>
                                                     </div>
                                                     <div class="row mt20">
                                                         <label class="col-md-2 control-label">Instagram</label>
                                                         <div class="col-md-8">
-                                                            <input type="text" id="instagram" class="form-control" data-parsley-type="url">
+                                                            <input type="text" id="instagram" name="instagram" class="form-control" value="<%=company.instagram%>" data-parsley-type="url">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="panel-footer">
+                                                    <div class="row">
+                                                        <div class="col-md-8 col-md-offset-2">
+                                                            <button type="submit" id="btnSave" class="btn-success btn">Salvar</button>
+                                                            <button id="btnClear" class="btn-inverse btn">Limpar</button>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </form>
-                                            <div class="panel-footer">
-                                                <div class="row">
-                                                    <div class="col-md-8 col-md-offset-2">
-                                                        <button id="btnSave" class="btn-success btn">Salvar</button>
-                                                        <button id="btnClear" class="btn-inverse btn">Limpar</button>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -168,22 +171,24 @@
         </div>
     </div>
 
-    <input type="text" class="hide" id="apiUrl"/>
-    <input type="text" class="hide" id="id"/>
+    <input type="text" class="hide" id="id" value="<%=company._id%>"/>
 
     <% include ../../partials/right-menu %>
 
     <% include ../../partials/scripts %>
 
-    <script>
-        $(document).ready(function () {
-            document.getElementById('apiUrl').value = "<%= api_url %>";
-        });
-    </script>
     <script src="assets/plugins/form-parsley/parsley.js"></script>
     <script src="assets/plugins/form-parsley/i18n/pt-br.js"></script>
     <script src="assets/plugins/form-parsley/parsley-config.js"></script>
     <script src="assets/js/pages/company/company.js"></script>
+
+    <% if(typeof message != 'undefined'){ %>
+    <script>
+        $(document).ready(function(){
+            Alerts.displayAlert("<%=message.title%>", "<%=message.message%>", "<%=message.type%>");
+        });
+    </script>
+    <% } %>
 </body>
 
 </html>
