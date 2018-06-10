@@ -44,7 +44,7 @@ router.post('/login', function(req, res){
         req.session.userName = body.name;
         req.session.userId = body._id;
 
-        res.render('index', {
+        res.render('pages/index', {
             api_url: 'http://localhost:3000',
             user: { 
                 name: req.session.userName
