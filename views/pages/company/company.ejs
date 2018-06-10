@@ -42,7 +42,7 @@
                                         <div class="panel-heading">
                                             <h2>Dados da Empresa</h2>
                                         </div>
-                                        <form action="/company/<%= company._id%>" method="post" role="form" class="form-horizontal row-border" id="form-company" data-parsley-validate>
+                                        <form action="/company" method="post" role="form" class="form-horizontal row-border" id="form-company" data-parsley-validate>
                                             <div class="panel-body">
                                                 <% if(typeof error != 'undefined' && error){ %>
                                                     <div class="alert alert-dismissable alert-danger">
@@ -153,8 +153,8 @@
                                                 <div class="panel-footer">
                                                     <div class="row">
                                                         <div class="col-md-8 col-md-offset-2">
-                                                            <button type="submit" id="btnSave" class="btn-success btn">Salvar</button>
-                                                            <button id="btnClear" class="btn-inverse btn">Limpar</button>
+                                                            <button id="btnSave" type="submit" class="btn-success btn">Salvar</button>
+                                                            <button id="btnClear" type="button" class="btn-inverse btn">Limpar</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -171,8 +171,6 @@
         </div>
     </div>
 
-    <input type="text" class="hide" id="id" value="<%=company._id%>"/>
-
     <% include ../../partials/right-menu %>
 
     <% include ../../partials/scripts %>
@@ -182,7 +180,7 @@
     <script src="assets/plugins/form-parsley/parsley-config.js"></script>
     <script src="assets/js/pages/company/company.js"></script>
 
-    <% if(typeof message != 'undefined'){ %>
+    <% if(typeof message != 'undefined' && typeof message.type != 'undefined'){ %>
     <script>
         $(document).ready(function(){
             Alerts.displayAlert("<%=message.title%>", "<%=message.message%>", "<%=message.type%>");

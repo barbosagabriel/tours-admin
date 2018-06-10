@@ -7,7 +7,7 @@ var authRoutes = require('../routes/auth.routes.js');
 module.exports = (function(){
 
     function isUserAuthenticated(req, res, next){
-        if(req.session.authenticated || req.path == '/login')
+        if((req.session.user && req.session.user.authenticated) || req.path == '/login')
             return next();
     
         res.render('pages/auth/login');
@@ -17,7 +17,7 @@ module.exports = (function(){
         app.all('*', isUserAuthenticated);
         app.use('/', homeRoutes);
         app.use('/company', companyRoutes);
-        app.use('/customers', customerRoutes);
+        app.use('/customer', customerRoutes);
         app.use('/', authRoutes);
         app.use('/', errorsRoutes);
     }

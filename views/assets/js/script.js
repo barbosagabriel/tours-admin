@@ -11,7 +11,8 @@ $(function() {
 
     function displayUserName(){
         var isMenuVisible = document.getElementById('menu-user-name');
-        if(isMenuVisible)
-            document.getElementById('menu-user-name').text = sessionStorage.getItem('user.name') || '';
+        if(isMenuVisible){
+            document.getElementById('menu-user-name').textContent = sessionStorage.getItem('user.name') || '';
+        }
     }
 });

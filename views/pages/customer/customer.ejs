@@ -22,7 +22,7 @@
                     <div class="page-content">
                         <ol class="breadcrumb">
                             <li class="">
-                                <a href="/customers">Clientes</a>
+                                <a href="/customer/list">Clientes</a>
                             </li>
                             <li class="active">
                                 <a href="#"><%= (!customer._id) ? "Novo" : "Editar" %></a>
@@ -42,29 +42,29 @@
                                         <div class="panel-heading">
                                             <h2>Dados do Cliente</h2>
                                         </div>
-                                        <div class="panel-body">
-                                            <form role="form" class="form-horizontal row-border" id="form-customer" data-parsley-validate>
+                                        <form id="form-customer" action="/customer" method="post" role="form" class="form-horizontal row-border" data-parsley-validate>
+                                            <div class="panel-body">
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <label class="col-md-2 control-label">Nome*</label>
                                                         <div class="col-md-8">
-                                                            <input type="text" id="name" class="form-control" value="<%= customer.name %>" required>
+                                                            <input type="text" id="name" name="name" class="form-control" value="<%= customer.name %>" required>
                                                         </div>
                                                     </div>
                                                     <div class="row mt20">
                                                         <label class="col-md-2 control-label">Primeiro Nome*</label>
                                                         <div class="col-md-3">
-                                                            <input type="text" id="first-name" class="form-control" value="<%= customer.firstName %>" readonly required>
+                                                            <input type="text" id="first-name" name="firstName" class="form-control" value="<%= customer.firstName %>" readonly required>
                                                         </div>
                                                         <label class="col-md-2 control-label">Último Nome*</label>
                                                         <div class="col-md-3">
-                                                            <input type="text" id="last-name" class="form-control" value="<%= customer.lastName %>" readonly required>
+                                                            <input type="text" id="last-name" name="lastName" class="form-control" value="<%= customer.lastName %>" readonly required>
                                                         </div>
                                                     </div>
                                                     <div class="row mt20">
                                                         <label class="col-md-2 control-label">CPF</label>
                                                         <div class="col-md-8">
-                                                            <input type="text" id="identification-number" class="form-control" value="<%= customer.identificationNumber %>">
+                                                            <input type="text" id="identification-number" name="identificationNumber" class="form-control" value="<%= customer.identificationNumber %>">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -72,17 +72,17 @@
                                                     <div class="row">
                                                         <label class="col-md-2 control-label">E-mail*</label>
                                                         <div class="col-md-8">
-                                                            <input type="text" id="email" class="form-control" data-parsley-type="email" value="<%= customer.email %>" equired>
+                                                            <input type="text" id="email" name="email" class="form-control" data-parsley-type="email" value="<%= customer.email %>" equired>
                                                         </div>
                                                     </div>
                                                     <div class="row mt20">
                                                         <label class="col-md-2 control-label">Telefone Principal*</label>
                                                         <div class="col-md-3">
-                                                            <input type="text" id="phone" class="form-control" value="<%= customer.phone %>" required>
+                                                            <input type="text" id="phone" name="phone" class="form-control" value="<%= customer.phone %>" required>
                                                         </div>
                                                         <label class="col-md-2 control-label">Telefone Secundário</label>
                                                         <div class="col-md-3">
-                                                            <input type="text" id="phone-secondary" class="form-control" value="<%= customer.phoneSecondary %>">
+                                                            <input type="text" id="phone-secondary" name="phoneSecondary" class="form-control" value="<%= customer.phoneSecondary %>">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -90,7 +90,7 @@
                                                     <div class="row">
                                                         <label class="col-md-2 control-label">Código Postal</label>
                                                         <div class="col-md-2">
-                                                            <input type="text" id="postal-code" class="form-control" value="<%= customer.postalCode %>">
+                                                            <input type="text" id="postal-code" name="postalCode" class="form-control" value="<%= customer.postalCode %>">
                                                         </div>
                                                         <!-- <div class="md-2">
                                                             <a href="#" class="btn btn-default mr10">Pesquisar CEP</a>
@@ -100,55 +100,56 @@
                                                     <div class="row mt20">
                                                         <label class="col-md-2 control-label">Endereço</label>
                                                         <div class="col-md-8">
-                                                            <input type="text" id="address" class="form-control" value="<%= customer.address %>">
+                                                            <input type="text" id="address" name="address" class="form-control" value="<%= customer.address %>">
                                                         </div>
                                                     </div>
                                                     <div class="row mt20">
                                                         <label class="col-md-2 control-label">Número</label>
                                                         <div class="col-md-8">
-                                                            <input type="text" id="address-number" class="form-control" value="<%= customer.addressNumber %>" data-parsley-minlength="1" data-parsley-type="alphanum">
+                                                            <input type="text" id="address-number" name="addressNumber" class="form-control" value="<%= customer.addressNumber %>" data-parsley-minlength="1" data-parsley-type="alphanum">
                                                         </div>
                                                     </div>
                                                     <div class="row mt20">
                                                         <label class="col-md-2 control-label">Complemento</label>
                                                         <div class="col-md-8">
-                                                            <input type="text" id="address-line2" class="form-control" value="<%= customer.addressLine2 %>">
+                                                            <input type="text" id="address-line2" name="addressLine2" class="form-control" value="<%= customer.addressLine2 %>">
                                                         </div>
                                                     </div>
                                                     <div class="row mt20">
                                                         <label class="col-md-2 control-label">Bairro</label>
                                                         <div class="col-md-8">
-                                                            <input type="text" id="address-neighbourhood" class="form-control" value="<%= customer.addressNeighbourhood %>">
+                                                            <input type="text" id="address-neighbourhood" name="addressNeighbourhood" class="form-control" value="<%= customer.addressNeighbourhood %>">
                                                         </div>
                                                     </div>
                                                     <div class="row mt20">
                                                         <label class="col-md-2 control-label">Cidade*</label>
                                                         <div class="col-md-8">
-                                                            <input type="text" id="city" class="form-control" value="<%= customer.city %>" required>
+                                                            <input type="text" id="city" name="city" class="form-control" value="<%= customer.city %>" required>
                                                         </div>
                                                     </div>
                                                     <div class="row mt20">
                                                         <label class="col-md-2 control-label">Estado*</label>
                                                         <div class="col-md-8">
-                                                            <input type="text" id="state" class="form-control" value="<%= customer.state %>" required>
+                                                            <input type="text" id="state" name="state" class="form-control" value="<%= customer.state %>" required>
                                                         </div>
                                                     </div>
                                                     <div class="row mt20">
                                                         <label class="col-md-2 control-label">País*</label>
                                                         <div class="col-md-8">
-                                                            <input type="text" id="country" class="form-control" value="<%= customer.country %>" required>
+                                                            <input type="text" id="country" name="country" class="form-control" value="<%= customer.country %>" required>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" id="id" name="id" class="hide" value="<%= customer._id %>"/>
+                                                </div>
+                                                <div class="panel-footer">
+                                                    <div class="row">
+                                                        <div class="col-md-8 col-md-offset-2">
+                                                            <button id="btnSave" type="submit" class="btn-success btn">Salvar</button>
+                                                            <button id="btnClear" type="button" class="btn-inverse btn">Limpar</button>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </form>
-                                            <div class="panel-footer">
-                                                <div class="row">
-                                                    <div class="col-md-8 col-md-offset-2">
-                                                        <button id="btnSave" class="btn-success btn">Salvar</button>
-                                                        <button id="btnClear" class="btn-inverse btn">Limpar</button>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -161,21 +162,18 @@
         </div>
     </div>
 
-    <input type="text" class="hide" id="apiUrl"/>
-    <input type="text" class="hide" id="id"/>
-    <input type="text" class="hide" id="company"/>
-
     <% include ../../partials/right-menu %>
 
     <% include ../../partials/scripts %>
 
+    <% if(typeof message != 'undefined' && typeof message.type != 'undefined'){ %>
     <script>
-        $(document).ready(function () {
-            document.getElementById('apiUrl').value = "<%= api_url %>";
-            document.getElementById('id').value = "<%= customer._id %>";
-            document.getElementById('company').value = "<%= customer.company %>" || "5b062f265ea6ff2288559865";
+        $(document).ready(function(){
+            Alerts.displayAlert("<%=message.title%>", "<%=message.message%>", "<%=message.type%>");
         });
     </script>
+    <% } %>
+
     <script src="/assets/plugins/form-parsley/parsley.js"></script>
     <script src="/assets/plugins/form-parsley/i18n/pt-br.js"></script>
     <script src="/assets/plugins/form-parsley/parsley-config.js"></script>

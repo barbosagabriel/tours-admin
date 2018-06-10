@@ -4,6 +4,10 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/login', function(req, res){
+    if(req.session.user && req.session.user.authenticated){
+        res.redirect('/');
+    }
+    
     res.render('pages/auth/login', {error: ''});
 });
 
@@ -39,14 +43,16 @@ router.post('/login', function(req, res){
             return;
         }
 
-        req.session.authenticated = true;
-        req.session.userId = body._id;
-        req.session.userName = body.name;
-        req.session.companyId = body.company;
+        req.session.user = {};
+        req.session.user.authenticated = true;
+        req.session.user.id = body._id;
+        req.session.user.name = body.name;
+        req.session.company = {};
+        req.session.company.id = body.company;
 
         res.render('pages/index', {
             user: { 
-                name: req.session.userName
+                name: req.session.user.name
             }
         });
     });

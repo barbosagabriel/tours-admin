@@ -8,8 +8,8 @@
 
         <% include ../../partials/styles %>
 
-            <link href="assets/plugins/datatables/dataTables.bootstrap.css" type="text/css" rel="stylesheet">
-            <link href="assets/plugins/datatables/dataTables.fontAwesome.css" type="text/css" rel="stylesheet">
+            <link href="/assets/plugins/datatables/dataTables.bootstrap.css" type="text/css" rel="stylesheet">
+            <link href="/assets/plugins/datatables/dataTables.fontAwesome.css" type="text/css" rel="stylesheet">
 
 </head>
 
@@ -74,10 +74,10 @@
                                                                             <%= customer.state %>
                                                                         </td>
                                                                         <td>
-                                                                            <a href="/customers/<%= customer._id%>/edit" class="btn btn-default-alt" alt="Editar">
+                                                                            <a href="/customer/<%= customer._id%>/edit" class="btn btn-default-alt" alt="Editar">
                                                                                 <i class="fa fa-pencil"></i>
                                                                             </a>
-                                                                            <a href="/customers/<%= customer._id%>/delete" class="btn btn-danger-alt" alt="Excluir">
+                                                                            <a href="/customer/<%= customer._id%>/delete" class="btn btn-danger-alt" alt="Excluir">
                                                                                 <i class="fa fa-trash"></i>
                                                                             </a>                                                                          
                                                                         </td>
@@ -108,8 +108,8 @@
 
             <% include ../../partials/scripts %>
 
-            <script src="assets/plugins/datatables/jquery.dataTables.js"></script>
-            <script src="assets/plugins/datatables/dataTables.bootstrap.js"></script>
+            <script src="/assets/plugins/datatables/jquery.dataTables.js"></script>
+            <script src="/assets/plugins/datatables/dataTables.bootstrap.js"></script>
             <script>
                 $(document).ready(function () {
                     $('#example').dataTable({

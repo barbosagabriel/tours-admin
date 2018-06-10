@@ -4,8 +4,8 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/', function(req, res){
-    request.get(process.env.API_URL + '/company/' + req.session.companyId, function(err, response, body){
-        if(err){
+    request.get(process.env.API_URL + '/company/' + req.session.company.id, function(err, response, body){
+        if(err || response.statusCode == 404){
             res.render('pages/errors/500');
             return;
         }      
@@ -22,8 +22,8 @@ router.get('/', function(req, res){
     });
 });
 
-router.post('/:id', function(req, res){
-    var id = req.params.id;
+router.post('/', function(req, res){
+    var id = req.session.company.id;
     var options = {
         url: process.env.API_URL + '/company/' + id,
         method: 'PUT',
