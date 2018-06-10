@@ -117,7 +117,15 @@
 
         <% include partials/right-menu %>
 
+        <script>
+            var name = "<%= typeof user.name != 'undefined' ? user.name : '' %>";
+            if(name){
+                sessionStorage.setItem('user.name', name);
+            }
+        </script>
+
         <% include partials/scripts %>
+
 
 </body>
 

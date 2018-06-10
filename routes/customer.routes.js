@@ -4,7 +4,6 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/', function(req, res){
-    //var companyId = req.session.companyId;
     request.get(process.env.API_URL + '/customer', function(err, response, data){
         if(err){
             res.render('pages/errors/500');
