@@ -4,7 +4,7 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/list', function(req, res){
-    request.get(process.env.API_URL + '/customer', function(err, response, body){
+    request.get(process.env.API_URL + '/customer/company/' + req.session.company.id, function(err, response, body){
         if(err){
             res.render('pages/errors/500');
         }
@@ -29,6 +29,7 @@ router.post('/', function(req, res){
         options.url = process.env.API_URL + '/customer';
         options.method = 'POST';
         delete(options.json.id);
+        options.json.company = req.session.company.id;
         createCompany(req, res, options);
     }else{
         options.url = process.env.API_URL + '/customer/' + id,
