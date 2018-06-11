@@ -21,15 +21,16 @@ router.get('/list', function(req, res){
 
 router.post('/', function(req, res){
     var id = req.body.id;
+    req.body.company = req.session.company.id;
+    
     var options = {
         json: req.body
     };
-
+    
     if(!id){
         options.url = process.env.API_URL + '/customer';
         options.method = 'POST';
         delete(options.json.id);
-        options.json.company = req.session.company.id;
         createCompany(req, res, options);
     }else{
         options.url = process.env.API_URL + '/customer/' + id,
