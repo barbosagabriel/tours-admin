@@ -439,4 +439,7 @@
   width: 14px;
   height: 14px;
 }
-/* Customizations /*
+/* Customizations */
+.dataTables_scrollBody thead {
+  visibility: hidden;
+}

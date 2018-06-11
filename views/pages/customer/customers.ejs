@@ -13,7 +13,7 @@
 
 </head>
 
-<body class="infobar-overlay sidebar-scroll">
+<body class="infobar-overlay">
 
     <% include ../../partials/header %>
 
@@ -48,13 +48,11 @@
                                             <div class="panel panel-default">
                                                 <div class="panel-body">
                                                     <div class="panel-body panel-no-padding">
-                                                        <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                                        <table id="customer-list" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                                             <thead>
                                                                 <tr>
                                                                     <th>Nome</th>
                                                                     <th>E-mail</th>
-                                                                    <th>Cidade</th>
-                                                                    <th>Estado</th>
                                                                     <th></th>
                                                                 </tr>
                                                             </thead>
@@ -68,12 +66,6 @@
                                                                             <%= customer.email %>
                                                                         </td>
                                                                         <td>
-                                                                            <%= customer.city %>
-                                                                        </td>
-                                                                        <td>
-                                                                            <%= customer.state %>
-                                                                        </td>
-                                                                        <td>
                                                                             <a href="/customer/<%= customer._id%>/edit" class="btn btn-default-alt" alt="Editar">
                                                                                 <i class="fa fa-pencil"></i>
                                                                             </a>
@@ -85,13 +77,6 @@
                                                                 <% }); %>
                                                             </tbody>
                                                         </table>
-                                                        <div class="panel-footer">
-                                                            <div class="row">
-                                                                <div class="col-md-8 col-md-offset-2">
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -110,43 +95,8 @@
 
             <script src="/assets/plugins/datatables/jquery.dataTables.js"></script>
             <script src="/assets/plugins/datatables/dataTables.bootstrap.js"></script>
-            <script>
-                $(document).ready(function () {
-                    $('#example').dataTable({
-                        "language": {
-                            "sEmptyTable": "Nenhum registro encontrado",
-                            "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
-                            "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
-                            "sInfoFiltered": "(Filtrados de _MAX_ registros)",
-                            "sInfoPostFix": "",
-                            "sInfoThousands": ".",
-                            "sLengthMenu": "_MENU_ resultados por página",
-                            "sLoadingRecords": "Carregando...",
-                            "sProcessing": "Processando...",
-                            "sZeroRecords": "Nenhum registro encontrado",
-                            "sSearch": "Pesquisar",
-                            "oPaginate": {
-                                "sNext": "Próximo",
-                                "sPrevious": "Anterior",
-                                "sFirst": "Primeiro",
-                                "sLast": "Último"
-                            },
-                            "oAria": {
-                                "sSortAscending": ": Ordenar colunas de forma ascendente",
-                                "sSortDescending": ": Ordenar colunas de forma descendente"
-                            }
-                        }
-                    });
-                    $('.dataTables_filter input').attr('placeholder', 'Pesquisar...');
-
-                    $('.panel-ctrls').append($('.dataTables_filter').addClass("pull-right")).find("label").addClass("panel-ctrls-center");
-                    $('.panel-ctrls').append("<i class='separator'></i>");
-                    $('.panel-ctrls').append($('.dataTables_length').addClass("pull-left")).find("label").addClass("panel-ctrls-center");
-
-                    $('.panel-footer').append($(".dataTable+.row"));
-                    $('.dataTables_paginate>ul.pagination').addClass("pull-right m0");
-                });
-            </script>
+            <script src="/assets/plugins/datatables/dataTables.config.js"></script>
+            <script src="/assets/js/pages/customer/customers.js"></script>
 </body>
 
 </html>
