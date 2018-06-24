@@ -4,7 +4,7 @@ const PORT = process.env.PORT || 8080;
 var express = require('express');
 var bodyParser = require("body-parser");
 var session = require('express-session');
-var routerProvider = require('./routes/routerProvider');
+var routerProvider = require('./routes/provider.routes');
 
 var app = express();
 

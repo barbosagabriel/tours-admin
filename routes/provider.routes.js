@@ -1,9 +1,10 @@
-var homeRoutes = require('../routes/home.routes.js');
-var errorsRoutes = require('../routes/errors.routes.js');
+var authRoutes = require('../routes/auth.routes.js');
 var companyRoutes = require('../routes/company.routes.js');
 var customerRoutes = require('../routes/customer.routes.js');
-var authRoutes = require('../routes/auth.routes.js');
+var errorsRoutes = require('../routes/errors.routes.js');
+var homeRoutes = require('../routes/home.routes.js');
 var profileRoutes = require('../routes/profile.routes.js');
+var serviceRoutes = require('../routes/service.routes.js');
 
 module.exports = (function(){
 
@@ -20,6 +21,7 @@ module.exports = (function(){
         app.use('/company', companyRoutes);
         app.use('/customer', customerRoutes);
         app.use('/profile', profileRoutes);
+        app.use('/service', serviceRoutes);
         app.use('/', authRoutes);
         app.use('/', errorsRoutes);
     }

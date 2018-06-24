@@ -25,17 +25,17 @@
                             <div class="page-content">
                                 <ol class="breadcrumb">
                                     <li class="">
-                                        <a href="/customers">Clientes</a>
+                                        <a href="/service">Serviços</a>
                                     </li>
                                     <li class="active">
                                         <a href="#">Todos</a>
                                     </li>
                                 </ol>
                                 <div class="page-heading">
-                                    <h1>Clientes</h1>
+                                    <h1>Serviços</h1>
                                     <div class="options">
                                         <div class="btn-toolbar">
-                                            <a href="/customer/create" class="btn btn-default" title="Novo Cliente">
+                                            <a href="/service/create" class="btn btn-default" title="Novo Serviço">
                                                 <i class="fa fa-fw fa-plus"></i>
                                                 <span>Novo</span>
                                             </a>
@@ -48,28 +48,28 @@
                                             <div class="panel panel-default">
                                                 <div class="panel-body">
                                                     <div class="panel-body panel-no-padding">
-                                                        <table id="customer-list" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                                        <table id="service-list" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                                             <thead>
                                                                 <tr>
                                                                     <th>Nome</th>
-                                                                    <th>E-mail</th>
+                                                                    <th>Valor</th>
                                                                     <th></th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <% customers.forEach(function(customer) { %>
+                                                                <% services.forEach(function(service) { %>
                                                                     <tr class="odd">
                                                                         <td>
-                                                                            <%= customer.name %>
+                                                                            <%= service.name %>
                                                                         </td>
                                                                         <td>
-                                                                            <%= customer.email %>
+                                                                            <%= service.price %>
                                                                         </td>
                                                                         <td>
-                                                                            <a href="/customer/<%= customer._id%>/edit" class="btn btn-default-alt" alt="Editar">
+                                                                            <a href="/service/<%= service._id%>/edit" class="btn btn-default-alt" alt="Editar">
                                                                                 <i class="fa fa-pencil"></i>
                                                                             </a>
-                                                                            <a href="/customer/<%= customer._id%>/delete" class="btn btn-danger-alt" alt="Excluir">
+                                                                            <a href="/service/<%= service._id%>/delete" class="btn btn-danger-alt" alt="Excluir">
                                                                                 <i class="fa fa-trash"></i>
                                                                             </a>                                                                          
                                                                         </td>
@@ -104,7 +104,7 @@
             <script src="/assets/plugins/datatables/jquery.dataTables.js"></script>
             <script src="/assets/plugins/datatables/dataTables.bootstrap.js"></script>
             <script src="/assets/plugins/datatables/dataTables.config.js"></script>
-            <script src="/assets/pages/customer/customers.js"></script>
+            <script src="/assets/pages/service/services.js"></script>
 </body>
 
 </html>

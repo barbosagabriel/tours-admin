@@ -1,6 +1,6 @@
 var request = require('request');
 
-var CustomerController = function(){
+var ServiceController = function(){
 
     function _create(req, res){
         req.body.company = req.session.company.id;
@@ -8,7 +8,7 @@ var CustomerController = function(){
     
         var options = {
             json: req.body,
-            url: process.env.API_URL + '/customer',
+            url: process.env.API_URL + '/service',
             method: 'POST'
         };
         
@@ -21,16 +21,16 @@ var CustomerController = function(){
             var message = {
                 type: 'success',
                 title: 'Ok! ', 
-                message: 'Cliente cadastrado com sucesso.' 
+                message: 'Serviço cadastrado com sucesso.' 
             };
     
             req.session.message = message;
-            res.redirect('/customer/' + body._id + '/edit');
+            res.redirect('/service/' + body._id + '/edit');
         });
     }
 
     function _findAll(companyId, req, res){
-        request.get(process.env.API_URL + '/customer/company/' + companyId, function(err, response, body){
+        request.get(process.env.API_URL + '/service/company/' + companyId, function(err, response, body){
             if(err){
                 res.render('pages/errors/500');
             }
@@ -38,20 +38,20 @@ var CustomerController = function(){
             var message = req.session.message;
             req.session.message = '';
     
-            res.render('pages/customer/customers', {
-                customers: JSON.parse(body),
+            res.render('pages/service/services', {
+                services: JSON.parse(body),
                 message: message
             });
         });
     }
 
     function _findOne(id, req, res){
-        request.get(process.env.API_URL + '/customer/' + id , function(err, response, body){
+        request.get(process.env.API_URL + '/service/' + id , function(err, response, body){
             if(err){
                 res.render('pages/errors/500');
             }
     
-            var customer = JSON.parse(body);
+            var service = JSON.parse(body);
             
             if(body.message != undefined){
                 res.render('pages/errors/404');
@@ -60,8 +60,8 @@ var CustomerController = function(){
             var message = req.session.message;
             req.session.message = '';
     
-            res.render('pages/customer/customer', {
-                customer: customer,
+            res.render('pages/service/service', {
+                service: service,
                 message: message
             });
     
@@ -73,7 +73,7 @@ var CustomerController = function(){
         
         var options = {
             json: req.body,
-            url: process.env.API_URL + '/customer/' + id,
+            url: process.env.API_URL + '/service/' + id,
             method: 'PUT'
         };
         
@@ -89,23 +89,23 @@ var CustomerController = function(){
                 message = {
                     type: 'error',
                     title: 'Ops! ', 
-                    message: 'Erro ao atualizar o Cliente.' 
+                    message: 'Erro ao atualizar o Serviço.' 
                 };
             }else{
                 message = {
                     type: 'success',
                     title: 'Ok! ', 
-                    message: 'Cliente atualizado com sucesso.' 
+                    message: 'Serviço atualizado com sucesso.' 
                 };
             }
             
             req.session.message = message;
-            res.redirect('/customer/' + id + '/edit');
+            res.redirect('/service/' + id + '/edit');
         });
     }
 
     function _remove(id, req, res){
-        request.delete(process.env.API_URL + '/customer/' + id , function(err, response, body){
+        request.delete(process.env.API_URL + '/service/' + id , function(err, response, body){
             if(err){
                 res.render('pages/errors/500');
             }
@@ -113,15 +113,15 @@ var CustomerController = function(){
             if(body.message != undefined){
                 res.render('pages/errors/404');
             }
-    
+
             var message = {
                 type: 'success',
                 title: 'Ok! ', 
-                message: 'Cliente excluído com sucesso.' 
+                message: 'Serviço excluído com sucesso.' 
             };
     
             req.session.message = message;
-            res.redirect('/customer/list');
+            res.redirect('/service/list');
         });
     }
     
@@ -135,4 +135,4 @@ var CustomerController = function(){
     
 }();
 
-module.exports = CustomerController;
+module.exports = ServiceController;

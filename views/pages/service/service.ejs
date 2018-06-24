@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../../partials/meta %>
+
+    <title>Tours Admin</title>
+
+    <% include ../../partials/styles %>
+
+</head>
+
+<body class="infobar-overlay">
+
+    <% include ../../partials/header %>
+
+    <div id="wrapper">
+        <div id="layout-static">
+            <% include ../../partials/left-menu %>
+            <div class="static-content-wrapper">
+                <div class="static-content">
+                    <div class="page-content">
+                        <ol class="breadcrumb">
+                            <li class="">
+                                <a href="/service/list">Clientes</a>
+                            </li>
+                            <li class="active">
+                                <a href="#"><%= (!service._id) ? "Novo" : "Editar" %></a>
+                            </li>
+                        </ol>
+                        <div class="page-heading">
+                            <h1><%= (!service._id) ? "Novo" : "Editar" %> Serviço</h1>
+                            <div class="options">
+                                <div class="btn-toolbar">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h2>Dados do Serviço</h2>
+                                        </div>
+                                        <form id="form-service" action="/service" method="post" role="form" class="form-horizontal row-border" data-parsley-validate>
+                                            <div class="panel-body">
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <label class="col-md-2 control-label">Nome*</label>
+                                                        <div class="col-md-8">
+                                                            <input type="text" id="name" name="name" class="form-control" value="<%= service.name %>" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mt20">
+                                                        <label class="col-md-2 control-label">Descrição</label>
+                                                        <div class="col-md-8">
+                                                            <textarea type="text" id="description" name="description" class="form-control" rows="4" style="resize: none;">
+                                                                <%= service.description %>
+                                                            </textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mt20">
+                                                        <label class="col-md-2 control-label">Valor*</label>
+                                                        <div class="col-md-8">
+                                                            <input type="text" id="price" name="price" class="form-control" value="<%= service.price %>" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <input type="text" id="id" name="id" class="hide" value="<%= service._id %>"/>
+                                                <div class="panel-footer">
+                                                    <div class="row">
+                                                        <div class="col-md-8 col-md-offset-2">
+                                                            <button id="btnSave" type="submit" class="btn-success btn">Salvar</button>
+                                                            <button id="btnClear" type="button" class="btn-inverse btn">Limpar</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% include ../../partials/footer %>
+            </div>
+        </div>
+    </div>
+
+    <% include ../../partials/right-menu %>
+
+    <% include ../../partials/scripts %>
+
+    <% if(typeof message != 'undefined' && typeof message.type != 'undefined'){ %>
+    <script>
+        $(document).ready(function(){
+            Alerts.displayAlert("<%=message.title%>", "<%=message.message%>", "<%=message.type%>");
+        });
+    </script>
+    <% } %>
+
+    <script src="/assets/plugins/form-parsley/parsley.js"></script>
+    <script src="/assets/plugins/form-parsley/i18n/pt-br.js"></script>
+    <script src="/assets/plugins/form-parsley/parsley-config.js"></script>
+    <script src="/assets/pages/service/service.js"></script>
+</body>
+
+</html>
