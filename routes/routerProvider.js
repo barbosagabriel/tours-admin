@@ -8,7 +8,7 @@ var profileRoutes = require('../routes/profile.routes.js');
 module.exports = (function(){
 
     function isUserAuthenticated(req, res, next){
-        if((req.session.user && req.session.user.authenticated) || req.path == '/login')
+        if((req.session.user && req.session.user.authenticated) || req.path == '/login' || req.path == '/forgot-password')
             return next();
     
         res.render('pages/auth/login');
