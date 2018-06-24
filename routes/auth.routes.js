@@ -47,12 +47,14 @@ router.post('/login', function(req, res){
         req.session.user.authenticated = true;
         req.session.user.id = body._id;
         req.session.user.name = body.name;
+        req.session.user.initials = body.initials;
         req.session.company = {};
         req.session.company.id = body.company;
 
         res.render('pages/index', {
             user: { 
-                name: req.session.user.name
+                name: req.session.user.name,
+                initials: req.session.user.initials
             }
         });
     });
