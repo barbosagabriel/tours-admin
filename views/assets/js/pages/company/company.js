@@ -4,12 +4,12 @@ $(document).ready(function () {
     
     $('#form-company').parsley(ParsleyConfig.options);
 
-    $('#form-login').submit(function() {
+    $('#form-company').submit(function() {
         return $('#form-company').parsley().validate();
     });
 
     $('#btnClear').on('click', function(){
-        clearAllFields()
+        clearAllFields();
     });
 });
 

@@ -44,12 +44,6 @@
                                         </div>
                                         <form action="/company" method="post" role="form" class="form-horizontal row-border" id="form-company" data-parsley-validate>
                                             <div class="panel-body">
-                                                <% if(typeof error != 'undefined' && error){ %>
-                                                    <div class="alert alert-dismissable alert-danger">
-                                                        <strong><%= error.title %></strong> <%= error.message %>
-                                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                                    </div>
-                                                <% } %>
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <label class="col-md-2 control-label">Nome*</label>

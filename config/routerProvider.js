@@ -3,6 +3,7 @@ var errorsRoutes = require('../routes/errors.routes.js');
 var companyRoutes = require('../routes/company.routes.js');
 var customerRoutes = require('../routes/customer.routes.js');
 var authRoutes = require('../routes/auth.routes.js');
+var profileRoutes = require('../routes/profile.routes.js');
 
 module.exports = (function(){
 
@@ -18,6 +19,7 @@ module.exports = (function(){
         app.use('/', homeRoutes);
         app.use('/company', companyRoutes);
         app.use('/customer', customerRoutes);
+        app.use('/profile', profileRoutes);
         app.use('/', authRoutes);
         app.use('/', errorsRoutes);
     }

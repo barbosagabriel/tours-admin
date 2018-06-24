@@ -119,8 +119,12 @@
 
         <script>
             var name = "<%= (typeof user != 'undefined' && typeof user.name != 'undefined') ? user.name : '' %>";
+            var initials = "<%= (typeof user != 'undefined' && typeof user.initials != 'undefined') ? user.initials : '' %>";
             if(name){
                 sessionStorage.setItem('user.name', name);
+            }
+            if(initials){
+                sessionStorage.setItem('user.initials', initials);
             }
         </script>
 

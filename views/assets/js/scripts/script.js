@@ -7,12 +7,13 @@ $(function() {
         radioClass: 'iradio_minimal-blue'
     });
 
-    displayUserName();
+    displayUserInfo();
 
-    function displayUserName(){
+    function displayUserInfo(){
         var isMenuVisible = document.getElementById('menu-user-name');
         if(isMenuVisible){
             document.getElementById('menu-user-name').textContent = sessionStorage.getItem('user.name') || '';
+            document.getElementById('menu-user-initials').textContent = sessionStorage.getItem('user.initials') || '';
         }
     }
 });
