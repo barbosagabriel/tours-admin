@@ -20,7 +20,8 @@ app.use(session({
 }));
 
 app.set('view engine', 'ejs');
-app.use(express.static(__dirname + '/views'));
+app.use('/views', express.static(__dirname + '/views'));
+app.use('/assets', express.static(__dirname + '/assets'));
 
 routerProvider.routes(app);
 
