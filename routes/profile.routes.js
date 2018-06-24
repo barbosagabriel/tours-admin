@@ -34,8 +34,6 @@ router.post('/', function(req, res){
     }
 
     req.body.company = req.session.company.id;
-    req.body.initials = getInitials(req.body.name);
-    console.log(req.body.initials);
 
     var options = {
         url: process.env.API_URL + '/user/' + req.session.user.id,
@@ -106,16 +104,5 @@ router.post('/change-password', function(req, res){
         res.redirect('/profile');
     });
 });
-
-function getInitials(name){
-    var names = name.split(" ");
-    
-    if(names.length > 0){
-        var firstNameLetter = names[0].substring(0,1);
-        var lastNameLetter = (names.length > 1) ? names[names.length-1].substring(0,1) : '';
-    }
-
-    return firstNameLetter + lastNameLetter;
-}
 
 module.exports = router;
