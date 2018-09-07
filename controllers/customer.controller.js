@@ -1,4 +1,5 @@
 var request = require('request');
+var customerService = require('./../services/customer.service');
 
 var CustomerController = function(){
 
@@ -30,19 +31,20 @@ var CustomerController = function(){
     }
 
     function _findAll(companyId, req, res){
-        request.get(process.env.API_URL + '/customer/company/' + companyId, function(err, response, body){
-            if(err){
-                res.render('pages/errors/500');
-            }
-    
-            var message = req.session.message;
-            req.session.message = '';
-    
-            res.render('pages/customer/customers', {
-                customers: JSON.parse(body),
-                message: message
+
+        var message = req.session.message;
+        req.session.message = '';
+
+        customerService.findAll(companyId)
+            .then(function(customers){
+                res.render('pages/customer/customers', {
+                    customers: customers,
+                    message: message
+                });
+            })
+            .catch(function(err){
+                throw err;
             });
-        });
     }
 
     function _findOne(id, req, res){

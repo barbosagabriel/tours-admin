@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../../partials/meta %>
+
+    <title>Tours Admin</title>
+
+    <% include ../../partials/styles %>
+
+</head>
+
+<body class="infobar-overlay">
+
+    <% include ../../partials/header %>
+
+    <div id="wrapper">
+        <div id="layout-static">
+            <% include ../../partials/left-menu %>
+            <div class="static-content-wrapper">
+                <div class="static-content">
+                    <div class="page-content">
+                        <ol class="breadcrumb">
+                            <li class="">
+                                <a href="/ticket/list">Reserva</a>
+                            </li>
+                            <li class="active">
+                                <a href="#"><%= (!ticket._id) ? "Nova" : "Editar" %></a>
+                            </li>
+                        </ol>
+                        <div class="page-heading">
+                            <h1><%= (!ticket._id) ? "Nova" : "Editar" %> Reserva</h1>
+                            <div class="options">
+                                <div class="btn-toolbar">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h2>Dados da Reserva</h2>
+                                        </div>
+                                        <form id="form-ticket" action="/ticket" method="post" role="form" class="form-horizontal row-border" data-parsley-validate>
+                                            <div class="panel-body">
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <label class="col-md-2 control-label">Data/Hora*</label>
+                                                        <div class="col-md-8">
+                                                            <input type="date" id="date" name="date" class="form-control" value="<%= (ticket.date) ? ticket.date.toISOString().substr(0, 10) : '' %>" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mt20">
+                                                        <label class="col-md-2 control-label">Cliente*</label>
+                                                        <div class="col-md-8">
+                                                            <select name="customer" id="customer" class="form-control" required>
+                                                                <option value="">Selecione...</option>
+                                                                <% customers.forEach(function(customer) { %>
+                                                                    <option value="<%= customer._id %>" <%= (customer._id == ticket.customer) ? 'selected="selected"' : '' %> ><%= customer.name %></option>
+                                                                <% }); %>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <!-- <div class="row mt20">
+                                                        <label class="col-md-2 control-label">Guia*</label>
+                                                        <div class="col-md-8">
+                                                            <select name="guide" id="guide" class="form-control" required>
+                                                                <option value="">Selecione...</option>
+                                                            </select>
+                                                        </div>
+                                                    </div> -->
+                                                    <div class="row mt20">
+                                                        <label class="col-md-2 control-label">Serviço*</label>
+                                                        <div class="col-md-8">
+                                                            <select name="service" id="service" class="form-control" required>
+                                                                <option value="">Selecione...</option>
+                                                                <% services.forEach(function(service) { %>
+                                                                    <option value="<%= service._id %>"  <%= (service._id == ticket.service) ? 'selected="selected"' : '' %> data-price="<%= service.price%>"><%= service.name %></option>
+                                                                <% }); %>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mt20">
+                                                        <label class="col-md-2 control-label">No. de Participantes*</label>
+                                                        <div class="col-md-8">
+                                                            <input type="number" id="participants" name="participants" class="form-control" min="1" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mt20">
+                                                        <label class="col-md-2 control-label">Sub-Total*</label>
+                                                        <div class="col-md-8">
+                                                            <input type="text" id="subtotal" name="subTotal" class="form-control" value="<%= ticket.subTotal %>" readonly required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mt20">
+                                                        <label class="col-md-2 control-label">Desconto*</label>
+                                                        <div class="col-md-8">
+                                                            <input type="text" id="discount" name="discount" class="form-control" value="<%= ticket.discount %>" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mt20">
+                                                        <label class="col-md-2 control-label">Total*</label>
+                                                        <div class="col-md-8">
+                                                            <input type="text" id="total" name="total" class="form-control"  value="<%= ticket.total %>"readonly required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <input type="text" id="id" name="id" class="hide" value="<%= ticket._id %>"/>
+                                                <div class="panel-footer">
+                                                    <div class="row">
+                                                        <div class="col-md-8 col-md-offset-2">
+                                                            <button id="btnSave" type="submit" class="btn-success btn">Salvar</button>
+                                                            <button id="btnClear" type="button" class="btn-inverse btn">Limpar</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% include ../../partials/footer %>
+            </div>
+        </div>
+    </div>
+
+    <% include ../../partials/right-menu %>
+
+    <% include ../../partials/scripts %>
+
+    <% if(typeof message != 'undefined' && typeof message.type != 'undefined'){ %>
+    <script>
+        $(document).ready(function(){
+            Alerts.displayAlert("<%=message.title%>", "<%=message.message%>", "<%=message.type%>");
+        });
+    </script>
+    <% } %>
+
+    <script src="/assets/plugins/form-parsley/parsley.js"></script>
+    <script src="/assets/plugins/form-parsley/i18n/pt-br.js"></script>
+    <script src="/assets/plugins/form-parsley/parsley-config.js"></script>
+    <script src="/assets/pages/ticket/ticket.js"></script>
+</body>
+
+</html>

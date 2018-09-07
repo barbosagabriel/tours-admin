@@ -5,6 +5,7 @@ var errorsRoutes = require('../routes/errors.routes.js');
 var homeRoutes = require('../routes/home.routes.js');
 var profileRoutes = require('../routes/profile.routes.js');
 var serviceRoutes = require('../routes/service.routes.js');
+var ticketRoutes = require('../routes/ticket.routes.js');
 
 module.exports = (function(){
 
@@ -22,6 +23,7 @@ module.exports = (function(){
         app.use('/customer', customerRoutes);
         app.use('/profile', profileRoutes);
         app.use('/service', serviceRoutes);
+        app.use('/ticket', ticketRoutes);
         app.use('/', authRoutes);
         app.use('/', errorsRoutes);
     }

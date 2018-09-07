@@ -1,4 +1,5 @@
 var request = require('request');
+var serviceService = require('../services/service.service');
 
 var ServiceController = function(){
 
@@ -30,19 +31,20 @@ var ServiceController = function(){
     }
 
     function _findAll(companyId, req, res){
-        request.get(process.env.API_URL + '/service/company/' + companyId, function(err, response, body){
-            if(err){
+        
+        var message = req.session.message;
+        req.session.message = '';
+
+        serviceService.findAll(companyId)
+            .then(function(services){
+                res.render('pages/service/services', {
+                    services: services,
+                    message: message
+                });
+            })
+            .catch(function(err){
                 res.render('pages/errors/500');
-            }
-    
-            var message = req.session.message;
-            req.session.message = '';
-    
-            res.render('pages/service/services', {
-                services: JSON.parse(body),
-                message: message
-            });
-        });
+            });    
     }
 
     function _findOne(id, req, res){
