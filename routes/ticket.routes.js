@@ -44,4 +44,8 @@ router.get('/:id/delete', function(req, res){
     ticketController.remove(req.params.id, req, res);
 });
 
+router.get('/:id/download', function(req, res){
+    ticketController.download(req.params.id, req, res);
+});
+
 module.exports = router;

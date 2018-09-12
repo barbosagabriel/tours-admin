@@ -67,28 +67,6 @@ var TicketController = function(){
             .catch(function(err){
                 res.render('pages/errors/500');
             });
-
-
-        // request.get(process.env.API_URL + '/ticket/' + id , function(err, response, body){
-        //     if(err){
-        //         res.render('pages/errors/500');
-        //     }
-    
-        //     var ticket = JSON.parse(body);
-            
-        //     if(body.message != undefined){
-        //         res.render('pages/errors/404');
-        //     }
-            
-        //     var message = req.session.message;
-        //     req.session.message = '';
-    
-        //     res.render('pages/ticket/ticket', {
-        //         ticket: ticket,
-        //         message: message
-        //     });
-    
-        // });
     }
     
     function _update(id, req, res){
@@ -147,11 +125,26 @@ var TicketController = function(){
             res.redirect('/ticket/list');
         });
     }
+
+    function _download(id, req, res){
+        request.get(process.env.API_URL + '/ticket/' + id + '/pdf', function(err, response, body){
+            if(err){
+                res.render('pages/errors/500');
+            }
+
+            var jsonBody = JSON.parse(body);
+    
+            res.setHeader('Content-disposition', 'attachment; filename=' + jsonBody.filename);
+            res.setHeader('Content-Type', 'application/pdf');
+            res.send(new Buffer(jsonBody.file, 'base64'));
+        });
+    }
     
     return {
         create: _create,
         findAll: _findAll,
         findOne: _findOne,
+        download: _download,
         update: _update,
         remove: _remove
     }

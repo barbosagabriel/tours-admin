@@ -8,6 +8,12 @@
 
     <% include ../../partials/styles %>
 
+    <style>
+        textarea {
+            resize: none;
+        }
+    </style>
+
 </head>
 
 <body class="infobar-overlay">
@@ -32,6 +38,12 @@
                             <h1><%= (!ticket._id) ? "Nova" : "Editar" %> Reserva</h1>
                             <div class="options">
                                 <div class="btn-toolbar">
+                                    <% if(ticket._id) {%>
+                                    <a href="/ticket/<%= ticket._id %>/download" class="btn btn-default" title="Download" target="_blank">
+                                        <i class="fa fa-file-o"></i>
+                                        <span>Gerar Voucher</span>
+                                    </a>
+                                    <% } %>
                                 </div>
                             </div>
                         </div>
@@ -40,7 +52,7 @@
                                 <div class="col-sm-12">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
-                                            <h2>Dados da Reserva</h2>
+                                            <h2><%= (!ticket._id) ? "Dados da Reserva" : "Reserva #" + ticket.number.toString().padStart(6, '0') %></h2>
                                         </div>
                                         <form id="form-ticket" action="/ticket" method="post" role="form" class="form-horizontal row-border" data-parsley-validate>
                                             <div class="panel-body">
@@ -57,7 +69,7 @@
                                                             <select name="customer" id="customer" class="form-control" required>
                                                                 <option value="">Selecione...</option>
                                                                 <% customers.forEach(function(customer) { %>
-                                                                    <option value="<%= customer._id %>" <%= (customer._id == ticket.customer) ? 'selected="selected"' : '' %> ><%= customer.name %></option>
+                                                                    <option value="<%= customer._id %>" <%= (ticket.customer && customer._id == ticket.customer._id) ? 'selected="selected"' : '' %> ><%= customer.name %></option>
                                                                 <% }); %>
                                                             </select>
                                                         </div>
@@ -76,7 +88,7 @@
                                                             <select name="service" id="service" class="form-control" required>
                                                                 <option value="">Selecione...</option>
                                                                 <% services.forEach(function(service) { %>
-                                                                    <option value="<%= service._id %>"  <%= (service._id == ticket.service) ? 'selected="selected"' : '' %> data-price="<%= service.price%>"><%= service.name %></option>
+                                                                    <option value="<%= service._id %>"  <%= (ticket.service && service._id == ticket.service._id) ? 'selected="selected"' : '' %> data-price="<%= service.price.toFixed(2) %>"><%= service.name %></option>
                                                                 <% }); %>
                                                             </select>
                                                         </div>
@@ -88,21 +100,47 @@
                                                         </div>
                                                     </div>
                                                     <div class="row mt20">
-                                                        <label class="col-md-2 control-label">Sub-Total*</label>
+                                                        <label class="col-md-2 control-label">Sub-Total (US$)*</label>
                                                         <div class="col-md-8">
                                                             <input type="text" id="subtotal" name="subTotal" class="form-control" value="<%= ticket.subTotal %>" readonly required>
                                                         </div>
                                                     </div>
                                                     <div class="row mt20">
-                                                        <label class="col-md-2 control-label">Desconto*</label>
+                                                        <label class="col-md-2 control-label">Desconto (US$)*</label>
                                                         <div class="col-md-8">
                                                             <input type="text" id="discount" name="discount" class="form-control" value="<%= ticket.discount %>" required>
                                                         </div>
                                                     </div>
                                                     <div class="row mt20">
-                                                        <label class="col-md-2 control-label">Total*</label>
+                                                        <label class="col-md-2 control-label">Total (US$)*</label>
                                                         <div class="col-md-8">
-                                                            <input type="text" id="total" name="total" class="form-control"  value="<%= ticket.total %>"readonly required>
+                                                            <input type="text" id="total" name="total" class="form-control"  value="<%= ticket.total %>" readonly required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <label class="col-md-2 control-label">Hotel do Cliente</label>
+                                                        <div class="col-md-8">
+                                                            <input type="text" id="customerHotel" name="customerHotel" class="form-control" value="<%= ticket.customerHotel %>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mt20">
+                                                        <label class="col-md-2 control-label">Informações Extras</label>
+                                                        <div class="col-md-8">
+                                                            <textarea id="extraInformation" name="extraInformation" class="form-control" rows="4"><%= ticket.extraInformation %></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mt20">
+                                                        <label class="col-md-2 control-label">Notas Especiais</label>
+                                                        <div class="col-md-8">
+                                                            <textarea id="notes" name="notes" class="form-control" rows="4"><%= ticket.notes %></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mt20">
+                                                        <label class="col-md-2 control-label">Informações de Pagamento</label>
+                                                        <div class="col-md-8">
+                                                            <textarea id="paymentInformation" name="paymentInformation" class="form-control" rows="4"><%= ticket.paymentInformation %></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -133,11 +171,11 @@
     <% include ../../partials/scripts %>
 
     <% if(typeof message != 'undefined' && typeof message.type != 'undefined'){ %>
-    <script>
-        $(document).ready(function(){
-            Alerts.displayAlert("<%=message.title%>", "<%=message.message%>", "<%=message.type%>");
-        });
-    </script>
+        <script>
+            $(document).ready(function(){
+                Alerts.displayAlert("<%=message.title%>", "<%=message.message%>", "<%=message.type%>");
+            });
+        </script>
     <% } %>
 
     <script src="/assets/plugins/form-parsley/parsley.js"></script>

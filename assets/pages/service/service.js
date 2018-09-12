@@ -3,6 +3,14 @@
 $(document).ready(function () {
     $('#form-service').parsley(ParsleyConfig.options);
 
+    $('#price').mask('#,##0.00', {reverse: true});
+
+    $('#price').on('change', function(){
+        var price = document.getElementById('price').value;
+        document.getElementById('price').value = $('#price').masked(Number(price.replace(',', '')).toFixed(2));
+        $('#price').trigger('keyup');
+    });
+
     $('#form-service').submit(function(){
         return $('#form-service').parsley().validate();
     });

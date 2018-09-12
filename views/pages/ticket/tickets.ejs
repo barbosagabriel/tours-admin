@@ -51,7 +51,7 @@
                                                         <table id="ticket-list" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                                             <thead>
                                                                 <tr>
-                                                                    <th>#</th>
+                                                                    <th>Código</th>
                                                                     <th>Data</th>
                                                                     <th>Cliente</th>
                                                                     <th>Serviço</th>
@@ -62,7 +62,7 @@
                                                                 <% tickets.forEach(function(ticket) { %>
                                                                     <tr class="odd">
                                                                         <td>
-                                                                            #<%= ticket.number %>
+                                                                            #<%= ticket.number.toString().padStart(6, '0') %>
                                                                         </td>
                                                                         <td>
                                                                             <%= new Date(ticket.date).toDateString() %> 

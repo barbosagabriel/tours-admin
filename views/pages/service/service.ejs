@@ -52,15 +52,19 @@
                                                         </div>
                                                     </div>
                                                     <div class="row mt20">
+                                                            <label class="col-md-2 control-label">Descrição Curta</label>
+                                                            <div class="col-md-8">
+                                                                <input type="text" id="shortDescription" name="shortDescription" class="form-control" value="<%= service.shortDescription %>">
+                                                            </div>
+                                                        </div>
+                                                    <div class="row mt20">
                                                         <label class="col-md-2 control-label">Descrição</label>
                                                         <div class="col-md-8">
-                                                            <textarea type="text" id="description" name="description" class="form-control" rows="4" style="resize: none;">
-                                                                <%= service.description %>
-                                                            </textarea>
+                                                            <textarea type="text" id="description" name="description" class="form-control" rows="4" style="resize: none;"><%= service.description %></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="row mt20">
-                                                        <label class="col-md-2 control-label">Valor*</label>
+                                                        <label class="col-md-2 control-label">Valor (US$)*</label>
                                                         <div class="col-md-8">
                                                             <input type="text" id="price" name="price" class="form-control" value="<%= service.price %>" required>
                                                         </div>
