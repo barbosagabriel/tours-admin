@@ -1,6 +1,5 @@
 $(document).ready(function () {
     $('#form-ticket').parsley(ParsleyConfig.options);
-    document.getElementById('participants').value = 1;
 
     $('#service').on('change', function(){
         setSubtotal();

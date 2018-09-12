@@ -3,7 +3,15 @@
 $(document).ready(function () {
     $('#form-service').parsley(ParsleyConfig.options);
 
-    $('#price').mask('#,##0.00', {reverse: true});
+    
+    if($('#price').val() != ''){
+        var price = document.getElementById('price').value;
+        document.getElementById('price').value = Number(price.replace(',', '')).toFixed(2);
+        $('#price').mask('#,##0.00', {reverse: true});      
+        document.getElementById('price').value = $('#price').masked(Number(price.replace(',', '')).toFixed(2));
+    }else{
+        $('#price').mask('#,##0.00', {reverse: true});        
+    }
 
     $('#price').on('change', function(){
         var price = document.getElementById('price').value;
