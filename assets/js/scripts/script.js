@@ -8,6 +8,12 @@ $(function() {
     });
 
     displayUserInfo();
+    displayNextTours();
+
+    function displayNextTours(){
+        var pureHtml = sessionStorage.getItem('nextTickets').replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&#34;/g, '"');
+        document.getElementById('next-tours').innerHTML = pureHtml || 'Nenhum passeio agendado para os próximos dias :(';
+    }
 
     function displayUserInfo(){
         var isMenuVisible = document.getElementById('menu-user-name');

@@ -1,4 +1,5 @@
 var request = require('request');
+var dashboardController = require('../controllers/dashboard.controller');
 
 var AuthController = function(){
 
@@ -41,13 +42,8 @@ var AuthController = function(){
             req.session.user.initials = body.initials;
             req.session.company = {};
             req.session.company.id = body.company;
-    
-            res.render('pages/index', {
-                user: { 
-                    name: req.session.user.name,
-                    initials: req.session.user.initials
-                }
-            });
+
+            dashboardController.getData(req, res);
         });
     }
 

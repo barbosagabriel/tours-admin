@@ -50,12 +50,12 @@
                                                         <div class="secondary">este mês</div>
                                                     </div>
                                                     <div class="tile-body">
-                                                        <div class="content">40</div>
+                                                        <div class="content"><%= ticketsThisMonth %></div>
                                                     </div>
                                                     <div class="tile-footer">
-                                                        <span class="info-text text-right">80% de 50</span>
+                                                        <span class="info-text text-right"><%= ticketsPercentual %>% de <%= ticketsGoal %></span>
                                                         <div class="progress">
-                                                            <div class="progress-bar" style="width: 80%"></div>
+                                                            <div class="progress-bar" style="width: <%= ticketsPercentual %>%"></div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -68,12 +68,12 @@
                                                         <div class="secondary">este mês</div>
                                                     </div>
                                                     <div class="tile-body">
-                                                        <div class="content">10</div>
+                                                        <div class="content"><%= customersThisMonth %></div>
                                                     </div>
                                                     <div class="tile-footer">
-                                                        <span class="info-text text-right">66% de 15</span>
+                                                        <span class="info-text text-right"><%= customersPercentual %>% de <%= customersGoal %></span>
                                                         <div class="progress">
-                                                            <div class="progress-bar" style="width: 66%"></div>
+                                                            <div class="progress-bar" style="width: <%= customersPercentual %>%"></div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -85,7 +85,7 @@
                                                         <span class="title">Clientes</span>
                                                     </div>
                                                     <div class="tile-body">
-                                                        <span class="content">2.500</span>
+                                                        <span class="content"><%= customers %></span>
                                                     </div>
                                                     <div class="tile-footer">
                                                     </div>
@@ -98,7 +98,7 @@
                                                         <div class="title">Serviços</div>
                                                     </div>
                                                     <div class="tile-body">
-                                                        <span class="content">18</span>
+                                                        <span class="content"><%= services %></span>
                                                     </div>
                                                     <div class="tile-footer text-center">
                                                     </div>
@@ -120,12 +120,14 @@
         <script>
             var name = "<%= (typeof user != 'undefined' && typeof user.name != 'undefined') ? user.name : '' %>";
             var initials = "<%= (typeof user != 'undefined' && typeof user.initials != 'undefined') ? user.initials : '' %>";
+
             if(name){
                 sessionStorage.setItem('user.name', name);
             }
             if(initials){
                 sessionStorage.setItem('user.initials', initials);
             }
+            sessionStorage.setItem('nextTickets', "<%= (typeof nextTickets != 'undefined') ? nextTickets : '' %>");
         </script>
 
         <% include ../partials/scripts %>

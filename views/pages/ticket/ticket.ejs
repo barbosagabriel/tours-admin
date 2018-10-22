@@ -60,7 +60,7 @@
                                                     <div class="row">
                                                         <label class="col-md-2 control-label">Data/Hora*</label>
                                                         <div class="col-md-8">
-                                                            <input type="date" id="date" name="date" class="form-control" value="<%= (ticket.date) ? ticket.date.toISOString().substr(0, 10) : '' %>" required>
+                                                            <input type="text" id="date" name="date" class="form-control datetime" value="<%= (ticket.date) ? ticket.date : '' %>" required>
                                                         </div>
                                                     </div>
                                                     <div class="row mt20">

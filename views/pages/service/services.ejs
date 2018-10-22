@@ -52,7 +52,7 @@
                                                             <thead>
                                                                 <tr>
                                                                     <th>Nome</th>
-                                                                    <th>Valor</th>
+                                                                    <th>Valor (US$)</th>
                                                                     <th></th>
                                                                 </tr>
                                                             </thead>
@@ -63,7 +63,7 @@
                                                                             <%= service.name %>
                                                                         </td>
                                                                         <td>
-                                                                            <%= service.price %>
+                                                                            <%= service.price.toFixed(2) %>
                                                                         </td>
                                                                         <td>
                                                                             <a href="/service/<%= service._id%>/edit" class="btn btn-default-alt" alt="Editar">
