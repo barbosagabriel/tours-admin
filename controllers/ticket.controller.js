@@ -143,8 +143,9 @@ var TicketController = function(){
 
     function _download(id, req, res){
         request.get(process.env.API_URL + '/ticket/' + id + '/pdf', function(err, response, body){
-            if(err){
+            if(err || response.statusCode == 400){
                 res.render('pages/errors/500');
+                return;
             }
 
             var jsonBody = JSON.parse(body);
