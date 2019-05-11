@@ -1,9 +1,9 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-var DashboardController = require('../controllers/dashboard.controller');
+var DashboardController = require("../controllers/dashboard.controller");
 
-router.get('/', function(req, res){
-    DashboardController.getData(req, res);
+router.get("/", function(req, res) {
+  DashboardController.getData(req, res);
 });
 
 module.exports = router;

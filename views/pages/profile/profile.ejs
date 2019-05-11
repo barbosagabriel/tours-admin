@@ -1,121 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <% include ../../partials/meta %>
 
     <title>Tours Admin</title>
 
     <% include ../../partials/styles %>
+  </head>
 
-</head>
-
-<body class="infobar-overlay">
-
+  <body class="infobar-overlay">
     <% include ../../partials/header %>
 
     <div id="wrapper">
-        <div id="layout-static">
-            <% include ../../partials/left-menu %>
-            <div class="static-content-wrapper">
-                <div class="static-content">
-                    <div class="page-content">
-                        <ol class="breadcrumb">
-                            <li class="">
-                                <a href="/profile">Configurações</a>
-                            </li>
-                            <li class="active">
-                                <a href="/profile">Perfil</a>
-                            </li>
-                        </ol>
-                        <div class="page-heading">
-                            <h1>Perfil</h1>
-                            <div class="options">
-                                <div class="btn-toolbar">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h2>Dados do Usuário</h2>
-                                    </div>
-                                    <form action="/profile" method="post" enctype="multipart/form-data" role="form" class="form-horizontal row-border" id="form-profile" data-parsley-validate>
-                                        <div class="panel-body">
-                                            <div class="form-group">
-                                                <div class="col-md-12 col-sm-2">
-                                                    <div class="form-group">
-                                                        <div class="row">
-                                                            <label class="col-md-2 control-label">Nome*</label>
-                                                            <div class="col-md-8">
-                                                                <input type="text" id="name" name="name" class="form-control" value="<%=user.name%>" required>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row mt20">
-                                                            <label class="col-md-2 control-label">E-mail*</label>
-                                                            <div class="col-md-8">
-                                                                <input type="text" id="email" name="email" class="form-control" value="<%=user.email%>" readonly required>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="panel-footer">
-                                                <div class="row">
-                                                    <div class="col-md-8 col-md-offset-2">
-                                                        <button id="btnSave" type="submit" class="btn-success btn">Salvar</button>
-                                                        <button id="btnClear" type="button" class="btn-inverse btn">Limpar</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h2>Alteração de Senha</h2>
-                                    </div>
-                                    <form action="/profile/change-password" method="post" role="form" class="form-horizontal row-border" id="form-password" data-parsley-validate>
-                                        <div class="panel-body">
-                                            <div class="form-group">
-                                                <div class="row">
-                                                    <label class="col-md-2 control-label">Nova Senha*</label>
-                                                    <div class="col-md-8">
-                                                        <input type="password" id="password" name="password" class="form-control" required>
-                                                    </div>
-                                                </div>
-                                                <div class="row mt20">
-                                                    <label class="col-md-2 control-label">Confirme a Nova Senha*</label>
-                                                    <div class="col-md-8">
-                                                        <input type="password" id="c-password" class="form-control" data-parsley-equalto="#password" data-parsley-equalto-message="As senhas não conferem" required>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="panel-footer">
-                                                <div class="row">
-                                                    <div class="col-md-8 col-md-offset-2">
-                                                        <button id="btnSavePassword" type="submit" class="btn-success btn">Salvar</button>
-                                                        <button id="btnClearPassword" type="button" class="btn-inverse btn">Limpar</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+      <div id="layout-static">
+        <% include ../../partials/left-menu %>
+        <div class="static-content-wrapper">
+          <div class="static-content">
+            <div class="page-content">
+              <ol class="breadcrumb">
+                <li class="">
+                  <a href="/profile">Configurações</a>
+                </li>
+                <li class="active">
+                  <a href="/profile">Perfil</a>
+                </li>
+              </ol>
+              <div class="page-heading">
+                <h1>Perfil</h1>
+                <div class="options">
+                  <div class="btn-toolbar"></div>
                 </div>
-                <% include ../../partials/footer %>
+              </div>
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h2>Dados do Usuário</h2>
+                    </div>
+                    <form
+                      action="/profile"
+                      method="post"
+                      enctype="multipart/form-data"
+                      role="form"
+                      class="form-horizontal row-border"
+                      id="form-profile"
+                      data-parsley-validate
+                    >
+                      <div class="panel-body">
+                        <div class="form-group">
+                          <div class="col-md-12 col-sm-2">
+                            <div class="form-group">
+                              <div class="row">
+                                <label class="col-md-2 control-label"
+                                  >Nome*</label
+                                >
+                                <div class="col-md-8">
+                                  <input
+                                    type="text"
+                                    id="name"
+                                    name="name"
+                                    class="form-control"
+                                    value="<%=user.name%>"
+                                    required
+                                  />
+                                </div>
+                              </div>
+                              <div class="row mt20">
+                                <label class="col-md-2 control-label"
+                                  >E-mail*</label
+                                >
+                                <div class="col-md-8">
+                                  <input
+                                    type="text"
+                                    id="email"
+                                    name="email"
+                                    class="form-control"
+                                    value="<%=user.email%>"
+                                    readonly
+                                    required
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="panel-footer">
+                          <div class="row">
+                            <div class="col-md-8 col-md-offset-2">
+                              <button
+                                id="btnSave"
+                                type="submit"
+                                class="btn-success btn"
+                              >
+                                Salvar
+                              </button>
+                              <button
+                                id="btnClear"
+                                type="button"
+                                class="btn-inverse btn"
+                              >
+                                Limpar
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h2>Alteração de Senha</h2>
+                    </div>
+                    <form
+                      action="/profile/change-password"
+                      method="post"
+                      role="form"
+                      class="form-horizontal row-border"
+                      id="form-password"
+                      data-parsley-validate
+                    >
+                      <div class="panel-body">
+                        <div class="form-group">
+                          <div class="row">
+                            <label class="col-md-2 control-label"
+                              >Nova Senha*</label
+                            >
+                            <div class="col-md-8">
+                              <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                class="form-control"
+                                required
+                              />
+                            </div>
+                          </div>
+                          <div class="row mt20">
+                            <label class="col-md-2 control-label"
+                              >Confirme a Nova Senha*</label
+                            >
+                            <div class="col-md-8">
+                              <input
+                                type="password"
+                                id="c-password"
+                                class="form-control"
+                                data-parsley-equalto="#password"
+                                data-parsley-equalto-message="As senhas não conferem"
+                                required
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="panel-footer">
+                          <div class="row">
+                            <div class="col-md-8 col-md-offset-2">
+                              <button
+                                id="btnSavePassword"
+                                type="submit"
+                                class="btn-success btn"
+                              >
+                                Salvar
+                              </button>
+                              <button
+                                id="btnClearPassword"
+                                type="button"
+                                class="btn-inverse btn"
+                              >
+                                Limpar
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
+          <% include ../../partials/footer %>
         </div>
+      </div>
     </div>
 
-    <% include ../../partials/right-menu %>
-
-    <% include ../../partials/scripts %>
+    <% include ../../partials/right-menu %> <% include ../../partials/scripts %>
 
     <script src="/assets/plugins/form-parsley/parsley.js"></script>
     <script src="/assets/plugins/form-parsley/i18n/pt-br.js"></script>
@@ -124,19 +193,25 @@
     <script src="/assets/pages/profile/profile.js"></script>
 
     <script>
-        var name = "<%= (typeof user != 'undefined' && typeof user.name != 'undefined') ? user.name : '' %>";
-        var initials = "<%= (typeof user != 'undefined' && typeof user.initials != 'undefined') ? user.initials : '' %>";
-        sessionStorage.setItem('user.name', name || '');
-        sessionStorage.setItem('user.initials', initials || '');
+      var name =
+        "<%= (typeof user != 'undefined' && typeof user.name != 'undefined') ? user.name : '' %>";
+      var initials =
+        "<%= (typeof user != 'undefined' && typeof user.initials != 'undefined') ? user.initials : '' %>";
+      sessionStorage.setItem("user.name", name || "");
+      sessionStorage.setItem("user.initials", initials || "");
     </script>
 
-    <% if(typeof message != 'undefined' && typeof message.type != 'undefined'){ %>
+    <% if(typeof message != 'undefined' && typeof message.type != 'undefined'){
+    %>
     <script>
-        $(document).ready(function(){
-            Alerts.displayAlert("<%=message.title%>", "<%=message.message%>", "<%=message.type%>");
-        });
+      $(document).ready(function() {
+        Alerts.displayAlert(
+          "<%=message.title%>",
+          "<%=message.message%>",
+          "<%=message.type%>"
+        );
+      });
     </script>
     <% } %>
-</body>
-
+  </body>
 </html>

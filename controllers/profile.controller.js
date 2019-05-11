@@ -1,104 +1,106 @@
-var request = require('request');
+var request = require("request");
 
-var ProfileController = function(){
+var ProfileController = (function() {
+  function _findOne(id, req, res) {
+    request.get(process.env.API_URL + "/user/" + id, function(
+      err,
+      response,
+      body
+    ) {
+      if (err || response.statusCode == 404) {
+        res.render("pages/errors/500");
+        return;
+      }
 
-    function _findOne(id, req, res){
-        request.get(process.env.API_URL + '/user/' + id, function(err, response, body){
-            if(err || response.statusCode == 404){
-                res.render('pages/errors/500');
-                return;
-            }      
-    
-            var user = JSON.parse(body);
-            var message = req.session.message;
-    
-            req.session.message = '';
-    
-            res.render('pages/profile/profile', {
-                user: user,
-                message: message
-            });
-        });
-    }
+      var user = JSON.parse(body);
+      var message = req.session.message;
 
-    function _update(id, req, res){
-        req.body.company = req.session.company.id;
+      req.session.message = "";
 
-        var options = {
-            url: process.env.API_URL + '/user/' + id,
-            method: 'PUT',
-            json: req.body
-        }
+      res.render("pages/profile/profile", {
+        user: user,
+        message: message
+      });
+    });
+  }
 
-        request(options, function(err, response, body){
-            if(err){
-                res.render('pages/errors/500');
-                return;
-            }
+  function _update(id, req, res) {
+    req.body.company = req.session.company.id;
 
-            var message = '';
+    var options = {
+      url: process.env.API_URL + "/user/" + id,
+      method: "PUT",
+      json: req.body
+    };
 
-            if(response.statusCode == 404 || response.statusCode == 500){
-                message = {
-                    type: 'error',
-                    title: 'Ops! ', 
-                    message: 'Erro ao atualizar os dados do perfil.'
-                }
-            }else{
-                message = {
-                    type: 'success',
-                    title: 'Ok! ', 
-                    message: 'Perfil atualizado com sucesso.' 
-                };
-            }
+    request(options, function(err, response, body) {
+      if (err) {
+        res.render("pages/errors/500");
+        return;
+      }
 
-            req.session.message = message;
-            res.redirect('/profile');
-        });
-    }
+      var message = "";
 
-    function _updatePassword(id, req, res){
-        req.body.company = req.session.company.id;
+      if (response.statusCode == 404 || response.statusCode == 500) {
+        message = {
+          type: "error",
+          title: "Ops! ",
+          message: "Erro ao atualizar os dados do perfil."
+        };
+      } else {
+        message = {
+          type: "success",
+          title: "Ok! ",
+          message: "Perfil atualizado com sucesso."
+        };
+      }
 
-        var options = {
-            url: process.env.API_URL + '/user/' + id,
-            method: 'PUT',
-            json: req.body
-        }
+      req.session.message = message;
+      res.redirect("/profile");
+    });
+  }
 
-        request(options, function(err, response, body){
-            if(err){
-                res.render('pages/errors/500');
-                return;
-            }
+  function _updatePassword(id, req, res) {
+    req.body.company = req.session.company.id;
 
-            var message = '';
+    var options = {
+      url: process.env.API_URL + "/user/" + id,
+      method: "PUT",
+      json: req.body
+    };
 
-            if(response.statusCode == 404 || response.statusCode == 500){
-                message = {
-                    type: 'error',
-                    title: 'Ops! ', 
-                    message: 'Erro ao atualizar a senha.'
-                }
-            }else{
-                message = {
-                    type: 'success',
-                    title: 'Ok! ', 
-                    message: 'Senha atualizada com sucesso.' 
-                };
-            }
+    request(options, function(err, response, body) {
+      if (err) {
+        res.render("pages/errors/500");
+        return;
+      }
 
-            req.session.message = message;
-            res.redirect('/profile');
-        });
-    }
+      var message = "";
 
-    return {
-        findOne: _findOne,
-        update: _update,
-        updatePassword: _updatePassword
-    }
+      if (response.statusCode == 404 || response.statusCode == 500) {
+        message = {
+          type: "error",
+          title: "Ops! ",
+          message: "Erro ao atualizar a senha."
+        };
+      } else {
+        message = {
+          type: "success",
+          title: "Ok! ",
+          message: "Senha atualizada com sucesso."
+        };
+      }
 
-}();
+      req.session.message = message;
+      res.redirect("/profile");
+    });
+  }
+
+  return {
+    findOne: _findOne,
+    update: _update,
+    updatePassword: _updatePassword
+  };
+})();
 
 module.exports = ProfileController;
