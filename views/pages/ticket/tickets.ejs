@@ -65,7 +65,8 @@
                                                                             #<%= ticket.number.toString().padStart(6, '0') %>
                                                                         </td>
                                                                         <td>
-                                                                            <%= new Date(ticket.date).toDateString() %> 
+                                                                            <span style="display: none;"><%= ticket.date %> </span>
+                                                                            <%= ticket.formattedDate %> 
                                                                         </td>
                                                                         <td>
                                                                             <%= ticket.customer.name %>

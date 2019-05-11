@@ -1,4 +1,6 @@
 var request = require('request');
+var moment = require('moment');
+
 var customerService = require('./../services/customer.service');
 var serviceService = require('./../services/service.service');
 var ticketService = require('./../services/ticket.service');
@@ -9,6 +11,10 @@ var TicketController = function(){
         req.body.company = req.session.company.id;
         delete(req.body.id);
     
+        var date = moment(req.body.date, 'DD/MM/yyyy hh:mm').format();
+        delete(req.body.date);
+        req.body.date = date;
+
         var options = {
             json: req.body,
             url: process.env.API_URL + '/ticket',
@@ -41,8 +47,11 @@ var TicketController = function(){
             var message = req.session.message;
             req.session.message = '';
     
+            var tickets = JSON.parse(body);
+            var tickets2 = tickets.map(t => Object.assign(t, {formattedDate: moment(t.date).format('DD/MM/YYYY HH:mm')}));
+
             res.render('pages/ticket/tickets', {
-                tickets: JSON.parse(body),
+                tickets: tickets2,
                 message: message
             });
         });
@@ -56,7 +65,9 @@ var TicketController = function(){
         Promise.all([findTicket, findCustomers, findServices])
             .then(function(result){
                 var ticket = result[0];
-                ticket.date = new Date(ticket.date);
+                var date = moment(new Date(ticket.date)).format('DD/MM/YYYY HH:mm');
+                delete(ticket.date);
+                ticket.date = date;
 
                 res.render('pages/ticket/ticket', {
                         ticket: ticket,
@@ -72,6 +83,10 @@ var TicketController = function(){
     function _update(id, req, res){
         req.body.company = req.session.company.id;
         
+        var date = moment(req.body.date, 'DD/MM/YYYY hh:mm').format();
+        delete(req.body.date);
+        req.body.date = date;
+
         var options = {
             json: req.body,
             url: process.env.API_URL + '/ticket/' + id,

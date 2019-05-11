@@ -3,14 +3,10 @@ $(document).ready(function () {
 
     if(document.getElementById('id').value == ''){
         document.getElementById('participants').value = 1;
-        $('.datetime').mask('00/00/0000 00:00', { placeholder: "mm/dd/aaaa hh:mm" });
-    }else{
-        var d = new Date(document.getElementById('date').value);
-        document.getElementById('date').value =  + ("0"+(d.getMonth()+1)).slice(-2) + ("0" + d.getDate()).slice(-2) +
-            d.getFullYear() + " " + ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
-        $('.datetime').mask('00/00/0000 00:00', { placeholder: "mm/dd/aaaa hh:mm" });
     }
-
+    
+    $('.datetime').mask('00/00/0000 00:00', { placeholder: "dd/mm/aaaa hh:mm" });
+    
     $('#service').on('change', function(){
         setSubtotal();
         setTotal();
